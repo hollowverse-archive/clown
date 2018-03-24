@@ -1,3 +1,5 @@
+export type MergeConfigs = (destination: any, source: any) => any;
+
 export type Rule = {
   validation: 'camelCase' | 'PascalCase' | 'ignore';
   patterns: string[];

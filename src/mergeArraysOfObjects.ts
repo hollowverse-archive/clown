@@ -1,0 +1,83 @@
+import * as _ from 'lodash';
+import { MergeConfigs } from './types';
+import {
+  isMergeableStructure,
+  guessKeyWithUniqueValue,
+  isArrayOfStrings,
+  isArrayOfNumbers,
+  isArrayOfObjects,
+  isArrayOfUnmergeables,
+  isUnmergeable,
+} from './utils';
+
+export function mergeArraysOfObjects(
+  destination: object[],
+  source: object[],
+  mergeConfigs: MergeConfigs,
+) {
+  /* In this function we handle config arrays that look like this:
+
+  Destination:
+  [
+    { x: 'a', y: ['foo', 'bar', 'baz'], z: 'ff', k: 12 },
+    { x: 'b', y: ['1foo', '1bar', '1baz'], z: 'ff' },
+  ],
+
+  Source:
+  [
+    { x: 'a', y: ['2foo', '2bar', 'baz'], z: 'nn' },
+    { x: 'b', y: ['1foo', '1bar', '1baz'], z: 'nn' },
+  ],
+
+  We want the merged result in this case to look like this:
+
+  [
+    { x: 'a', y: ['foo', 'bar', 'baz', '2foo', '2bar'], z: 'nn', k: 12 },
+    { x: 'b', y: ['1foo', '1bar', '1baz'], z: 'nn' },
+  ]
+
+  Usually in config files, in structures such as the above, there's one key
+  that determines the uniqueness of objects. In our sample data above, that key would be `x`.
+
+  Our goal is to merge all the objects with the same value of `x` together.
+
+  So first, let's find the unique key for our objects. */
+  const uniqueKey = guessKeyWithUniqueValue(destination);
+
+  /* Since we'll be merging all objects that have the same key together,
+  we don't need the two config objects to be separate, we can combine them all into
+  one array, like this:
+
+  [
+    { x: 'a', y: ['foo', 'bar', 'baz'], z: 'ff', k: 12 },
+    { x: 'b', y: ['1foo', '1bar', '1baz'], z: 'ff', },
+    { x: 'a', y: ['2foo', '2bar', 'baz'], z: 'nn', },
+    { x: 'b', y: ['1foo', '1bar', '1baz'], z: 'nn', },
+  ]; */
+  const combinedJsonConfigsArray = [...destination, ...source];
+
+  /* Next, we can group our config objects by their unique key, like this
+
+  {
+    a: [
+      { x: 'a', y: ['foo', 'bar', 'baz'], z: 'ff', k: 12, },
+      { x: 'a', y: ['2foo', '2bar', 'baz'], z: 'nn', },
+    ],
+    b: [
+      { x: 'b', y: ['1foo', '1bar', '1baz'], z: 'ff', },
+      { x: 'b', y: ['1foo', '1bar', '1baz'], z: 'nn', },
+    ],
+  }; */
+  const groupedByKey = _.groupBy(combinedJsonConfigsArray, uniqueKey);
+
+  /* Now we can reduce the value of each key into a single object */
+  const processedGroupedByKey = _.mapValues(groupedByKey, arrOfObjs => {
+    /* We use `reduceRight` so that we start from the end so that the last values overwrite
+    earlier values */
+    return _.reduceRight(arrOfObjs, (acc, obj) => {
+      return mergeConfigs(obj, acc);
+    });
+  });
+
+  return _.values(processedGroupedByKey);
+}
