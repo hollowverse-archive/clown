@@ -1,9 +1,9 @@
-import { mergeConfigs } from '../mergeConfigs';
+import { extendConfigs } from '../extendConfigs';
 
-describe('mergeConfigs of tsconfig.json files', () => {
+describe('extendConfigs of tsconfig.json files', () => {
   it('works 1', () => {
     expect(
-      mergeConfigs(
+      extendConfigs(
         {
           compilerOptions: {
             checkJs: true,

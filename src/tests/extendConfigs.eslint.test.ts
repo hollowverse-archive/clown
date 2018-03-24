@@ -1,9 +1,9 @@
-import { mergeConfigs } from '../mergeConfigs';
+import { extendConfigs } from '../extendConfigs';
 
-describe('mergeConfigs of eslint files', () => {
+describe('extendConfigs of eslint files', () => {
   it('works 1', () => {
     expect(
-      mergeConfigs(
+      extendConfigs(
         {
           plugins: ['graphql'],
           rules: {

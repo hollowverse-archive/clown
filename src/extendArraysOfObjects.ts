@@ -1,11 +1,11 @@
 import * as _ from 'lodash';
-import { MergeConfigs } from './types';
+import { ExtendConfigs } from './types';
 import { guessKeyWithUniqueValue } from './utils';
 
-export function mergeArraysOfObjects(
+export function extendArraysOfObjects(
   destination: object[],
   source: object[],
-  mergeConfigs: MergeConfigs,
+  extendConfigs: ExtendConfigs,
 ) {
   /* In this function we handle config arrays that look like this:
 
@@ -67,7 +67,7 @@ export function mergeArraysOfObjects(
     /* We use `reduceRight` so that we start from the end so that the last values overwrite
     earlier values */
     return _.reduceRight(arrOfObjs, (acc, obj) => {
-      return mergeConfigs(obj, acc);
+      return extendConfigs(obj, acc);
     });
   });
 

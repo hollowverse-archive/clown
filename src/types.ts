@@ -1,1 +1,1 @@
-export type MergeConfigs = (destination: any, source: any) => any;
+export type ExtendConfigs = (destination: any, source: any) => any;

@@ -1,9 +1,9 @@
-import { mergeConfigs } from '../mergeConfigs';
+import { extendConfigs } from '../extendConfigs';
 
-describe.only('mergeConfigs of stylelintrc', () => {
+describe.only('extendConfigs of stylelintrc', () => {
   it('works 1', () => {
     expect(
-      mergeConfigs(
+      extendConfigs(
         {
           plugins: ['stylelint-no-unsupported-browser-features'],
           rules: {

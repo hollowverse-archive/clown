@@ -1,9 +1,9 @@
-import { mergeConfigs } from '../mergeConfigs';
+import { extendConfigs } from '../extendConfigs';
 
-describe('mergeConfigs of package.json files', () => {
+describe('extendConfigs of package.json files', () => {
   it('works 1', () => {
     expect(
-      mergeConfigs(
+      extendConfigs(
         {
           name: 'hollowverse',
           version: '1.0.0',

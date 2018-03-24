@@ -4,9 +4,9 @@ import {
   isArrayOfUnmergeables,
   isUnmergeable,
 } from './utils';
-import { mergeArraysOfObjects } from './mergeArraysOfObjects';
+import { extendArraysOfObjects } from './extendArraysOfObjects';
 
-export function mergeConfigs(destination: any, source: any) {
+export function extendConfigs(destination: any, source: any) {
   const configs = [destination, source];
 
   if (_.every(configs, isUnmergeable)) {
@@ -18,7 +18,7 @@ export function mergeConfigs(destination: any, source: any) {
   }
 
   if (_.every(configs, isArrayOfObjects)) {
-    return mergeArraysOfObjects(destination, source, mergeConfigs);
+    return extendArraysOfObjects(destination, source, extendConfigs);
   }
 
   if (_.every(configs, _.isPlainObject)) {
@@ -31,7 +31,7 @@ export function mergeConfigs(destination: any, source: any) {
         return destination[key];
       }
 
-      return mergeConfigs(destination[key], source[key]);
+      return extendConfigs(destination[key], source[key]);
     });
   }
 

@@ -1,9 +1,9 @@
-import { mergeConfigs } from '../mergeConfigs';
+import { extendConfigs } from '../extendConfigs';
 
-describe('mergeConfigs of validate-filenames', () => {
+describe('extendConfigs of validate-filenames', () => {
   it('works 1', () => {
     expect(
-      mergeConfigs(
+      extendConfigs(
         {
           rules: [
             {
