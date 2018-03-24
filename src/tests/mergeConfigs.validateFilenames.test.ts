@@ -1,6 +1,6 @@
 import { mergeConfigs } from '../mergeConfigs';
 
-describe.only('mergeConfigs of validate-filenames', () => {
+describe('mergeConfigs of validate-filenames', () => {
   it('works 1', () => {
     expect(
       mergeConfigs(
