@@ -1,6 +1,6 @@
 {
-  "name": "@hollowverse/configurator",
-  "version": "1.3.2",
+  "name": "@hollowverse/extend-config",
+  "version": "1.0.0",
   "description": "Simple scaffolding and configuration synchronization tool",
   "repository": "git@github.com:hollowverse/configurator.git",
   "author": "Hollowverse",
@@ -16,7 +16,7 @@
     "access": "public"
   },
   "bin": {
-    "hvc": "./bin/src/hvc.js"
+    "hvc": "./bin/src/hec.js"
   },
   "eslintIgnore": [
     "bin/**/*"

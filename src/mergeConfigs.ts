@@ -35,8 +35,7 @@ export function mergeConfigs(destination: any, source: any) {
     });
   }
 
-  /* All complex structures will be handled by the code above. If we get to this point,
-  that means we were given simple values, such as strings, numbers, booleans. In such cases,
-  we just return the source value. */
+  /* If we don't explicitly handle the case in one of the branches above, just
+  return the source as the value of the merge. */
   return source;
 }

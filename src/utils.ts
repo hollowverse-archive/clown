@@ -1,9 +1,5 @@
 import * as _ from 'lodash';
 
-export function isMergeableStructure(value: any) {
-  return _.some([_.isArray, _.isPlainObject], fn => fn(value));
-}
-
 export function isArrayOfObjects(value: any[]): value is object[] {
   return _.isArray(value) && _.every(value, _.isObject);
 }
@@ -19,10 +15,6 @@ export function keyIsPotentialId(arrayOfObjects: object[], key: string) {
 
 export function isArrayOfStrings(value: any[]): value is string[] {
   return _.isArray(value) && _.every(value, _.isString);
-}
-
-export function isArrayOfNumbers(value: any[]): value is number[] {
-  return _.isArray(value) && _.every(value, _.isNumber);
 }
 
 export function guessKeyWithUniqueValue(records: object[]) {
