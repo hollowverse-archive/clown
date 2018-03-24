@@ -1,14 +1,6 @@
 import * as _ from 'lodash';
 import { MergeConfigs } from './types';
-import {
-  isMergeableStructure,
-  guessKeyWithUniqueValue,
-  isArrayOfStrings,
-  isArrayOfNumbers,
-  isArrayOfObjects,
-  isArrayOfUnmergeables,
-  isUnmergeable,
-} from './utils';
+import { guessKeyWithUniqueValue } from './utils';
 
 export function mergeArraysOfObjects(
   destination: object[],

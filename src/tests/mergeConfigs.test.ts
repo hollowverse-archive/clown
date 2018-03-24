@@ -1,4 +1,4 @@
-import { mergeConfigs } from './mergeConfigs';
+import { mergeConfigs } from '../mergeConfigs';
 
 describe('mergeConfigs', () => {
   describe('merging primitives', () => {
