@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 import path from 'path';
-import { verifyHecConfigLooksGood, readFile, writeFile } from './utils';
+import {
+  verifyHecConfigLooksGood,
+  isMergeableJsonContent,
+  readFile,
+  writeFile,
+  isDotIgnoreFile,
+} from './utils';
 import { HecConfig, ExtensionPathsAndSourceFile } from './types';
 import glob from 'globby';
 import bluebird from 'bluebird';
@@ -88,7 +94,7 @@ async function main() {
   async function moveAndExtend(extensionPath: string, sourceFile: string) {
     const sourceFilePath = path.resolve(extensionPath, sourceFile);
     const destinationFilePath = path.resolve(pwd, sourceFile);
-    const sourceFileContent = await readFile(sourceFilePath);
+    const sourceFileContent = (await readFile(sourceFilePath)) as string;
     const destinationFileContent = await readFile(destinationFilePath);
 
     if (destinationFileContent === undefined) {
@@ -96,7 +102,7 @@ async function main() {
       file at the expected location, either because the directory itself or the file doesn't exist.
       So before we attempt to create the file, let's ensure that the directory exists and then create the file. */
       await mkdirp(path.dirname(destinationFilePath));
-      return writeFile(destinationFilePath, sourceFileContent as string);
+      return writeFile(destinationFilePath, sourceFileContent);
     }
 
     if (isDotIgnoreFile(path.basename(destinationFilePath))) {
@@ -108,16 +114,16 @@ async function main() {
       return writeFile(destinationFilePath, extendedContent);
     }
 
-    if (isJsonContent(destinationFileContent)) {
+    if (isMergeableJsonContent(destinationFileContent)) {
       const extendedContent = extendJson(
-        destinationFileContent,
-        sourceFileContent,
+        JSON.parse(destinationFileContent),
+        JSON.parse(sourceFileContent),
       );
 
-      return writeFile(destinationFilePath, extendedContent);
+      return writeFile(destinationFilePath, JSON.stringify(extendedContent));
     }
 
-    return writeFile(destinationFilePath, sourceFileContent as string);
+    return writeFile(destinationFilePath, sourceFileContent);
   }
 }
 

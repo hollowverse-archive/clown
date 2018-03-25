@@ -29,3 +29,19 @@ export function verifyHecConfigLooksGood(hecConfig: HecConfig) {
     throw new Error('hec.js file does not look valid');
   }
 }
+
+export function isMergeableJsonContent(str: string) {
+  let content: any;
+
+  try {
+    content = JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+
+  return _.some([_.isArray, _.isPlainObject], fn => fn(content));
+}
+
+export function isDotIgnoreFile(fileName: string) {
+  return /^\..*ignore.*/i.test(fileName);
+}
