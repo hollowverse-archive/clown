@@ -1,5 +1,22 @@
 import { HecConfig } from './types';
 import _ from 'lodash';
+import fs from 'fs';
+import { promisify } from 'util';
+
+const promisifiedReadFile = promisify(fs.readFile);
+const promisifiedWriteFile = promisify(fs.writeFile);
+
+export async function writeFile(filePath: string, fileContent: string) {
+  return await promisifiedWriteFile(filePath, fileContent, 'utf8');
+}
+
+export async function readFile(filePath: string) {
+  try {
+    return await promisifiedReadFile(filePath, 'utf8');
+  } catch (e) {
+    return undefined;
+  }
+}
 
 export function verifyHecConfigLooksGood(hecConfig: HecConfig) {
   const looksGood =

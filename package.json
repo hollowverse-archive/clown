@@ -59,6 +59,7 @@
     "globby": "^8.0.1",
     "lodash": "^4.17.4",
     "minimatch": "^3.0.4",
+    "mkdirp": "^0.5.1",
     "shelljs": "^0.7.8"
   },
   "devDependencies": {
@@ -69,6 +70,7 @@
     "@types/jest": "^21.1.5",
     "@types/lodash": "^4.14.85",
     "@types/minimatch": "^3.0.1",
+    "@types/mkdirp": "^0.5.2",
     "@types/node": "^8.0.53",
     "@types/shelljs": "^0.7.6",
     "babel-cli": "^6.26.0",

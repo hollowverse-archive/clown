@@ -1,30 +1,14 @@
 #!/usr/bin/env node
 import path from 'path';
-import { verifyHecConfigLooksGood } from './utils';
-import { HecConfig } from './types';
+import { verifyHecConfigLooksGood, readFile, writeFile } from './utils';
+import { HecConfig, ExtensionPathsAndSourceFile } from './types';
 import glob from 'globby';
 import bluebird from 'bluebird';
 import _ from 'lodash';
+import realmkdirp from 'mkdirp';
+import { promisify } from 'util';
 
-function getCorrespondingDestinationPath(sourceFile: string, pwd: string) {
-  return path.resolve();
-  /*
-  {
-    "some/path/node_modules/@hollowverse/config/eslint" : [
-      {
-        source: "some/path/node_modules/@hollowverse/config/eslint/.eslintrc.json",
-        destination: "some/path/.eslintrc.json"
-      },
-      {
-        source: "some/path/node_modules/@hollowverse/config/eslint/package.json",
-        destination: "some/path/package.json"
-      }
-    ]
-  }
-  "some/path",
-  "some/path/node_modules/@hollowverse/config/eslint/package.json" - "some/path/node_modules/@hollowverse/config/eslint"
-  */
-}
+const mkdirp = promisify(realmkdirp);
 
 async function main() {
   /* pwd is the location from where the user is running this shell script */
@@ -62,62 +46,79 @@ async function main() {
   /* Now, `extensionsPaths` is an array of absolute paths to the extension folders. We need a list of all the files and
   folders inside each of the extension folders. We can use `glob` to list the content.
 
-  So, let's reduce the list of extension paths to a single object with the key being the extension path and the value being
-  an array of the files paths relative to the extension path.
+  So, let's map the list of extension paths so that for each path, we also have a list of the files
+  paths relative to the extension path:
 
-  {
-    "some/path/node_modules/@hollowverse/config/eslint" : [
-      ".eslintrc.json",
-      "package.json",
-    "etc...": [
-      "etc...",
-      "etc..."
+  [
+    [
+      "some/path/node_modules/@hollowverse/config/eslint", [".eslintrc.json", "package.json"],
+    ],
+    [
+      "etc...": ["etc...", "etc..."]
     ]
-  }
+  ]
   */
-  const sourceFilesByExtensionName = await bluebird.reduce(
+  const extensionPathsAndSourceFiles = await bluebird.map(
     extensionPaths,
-    async (obj: { [name: string]: string[] }, extensionPath: string) => {
-      obj[extensionPath] = (await glob(extensionPath, { dot: true })).map(
-        sourceFile => path.relative(extensionPath, sourceFile),
+    async (extensionPath: string) => {
+      return [
+        extensionPath,
+        await glob('**', { dot: true, cwd: extensionPath }),
+      ] as ExtensionPathsAndSourceFile;
+    },
+  );
+
+  /* Now we can iterate over the source files for each extension, and either merge them with existing
+  destination files, or simply copy them over as-is.
+
+  Since we're doing this operation in an async manner, we return a promise from our `main` function
+  to make sure the process doesn't exit before all promises have been resolved.
+  (I'm not sure about this last bit, but I'm doing it just in case.) */
+  await bluebird.each(extensionPathsAndSourceFiles, iterateOverSourceFiles);
+
+  function iterateOverSourceFiles([
+    extensionPath,
+    sourceFiles,
+  ]: ExtensionPathsAndSourceFile) {
+    return bluebird.each(sourceFiles, sourceFile =>
+      moveAndExtend(extensionPath, sourceFile),
+    );
+  }
+
+  async function moveAndExtend(extensionPath: string, sourceFile: string) {
+    const sourceFilePath = path.resolve(extensionPath, sourceFile);
+    const destinationFilePath = path.resolve(pwd, sourceFile);
+    const sourceFileContent = await readFile(sourceFilePath);
+    const destinationFileContent = await readFile(destinationFilePath);
+
+    if (destinationFileContent === undefined) {
+      /* if the destinationFileContent is undefined, that means we couldn't find the destination
+      file at the expected location, either because the directory itself or the file doesn't exist.
+      So before we attempt to create the file, let's ensure that the directory exists and then create the file. */
+      await mkdirp(path.dirname(destinationFilePath));
+      return writeFile(destinationFilePath, sourceFileContent as string);
+    }
+
+    if (isDotIgnoreFile(path.basename(destinationFilePath))) {
+      const extendedContent = extendDotIgnoreFile(
+        destinationFileContent,
+        sourceFileContent,
       );
 
-      return obj;
-    },
-    {},
-  );
+      return writeFile(destinationFilePath, extendedContent);
+    }
 
-  /* Now we want to get the corresponding destination file for each source file. We can map the values
-  of each of our sourceFiles object to make it look like this:
+    if (isJsonContent(destinationFileContent)) {
+      const extendedContent = extendJson(
+        destinationFileContent,
+        sourceFileContent,
+      );
 
-  {
-    "some/path/node_modules/@hollowverse/config/eslint" : [
-      {
-        source: ".eslintrc.json",
-        destination: "some/path/.eslintrc.json"
-      },
-      {
-        source: "some/path/node_modules/@hollowverse/config/eslint/package.json",
-        destination: "some/path/package.json"
-      }
-    ]
+      return writeFile(destinationFilePath, extendedContent);
+    }
+
+    return writeFile(destinationFilePath, sourceFileContent as string);
   }
-  */
-  const sourceAndDestinationFiles = _.mapValues(
-    sourceFilesByExtensionName,
-    sourceFiles =>
-      sourceFiles.map(sourceFile => ({
-        source: sourceFile,
-        desintation: getCorrespondingDestinationPath(sourceFile, pwd),
-      })),
-  );
-
-  // const sourceAndDestinationFiles = sourceFiles.map(sourceFile => ({
-  //   sourceFile,
-  //   destinationFile: getCorrespondingDestinationPath(sourceFile, pwd),
-  // }));
-
-  // console.log('sourceAndDestinationFiles', sourceAndDestinationFiles);
 }
 
 main();
