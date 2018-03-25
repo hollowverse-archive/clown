@@ -1,1 +1,1 @@
-export type ExtendConfigs = (destination: any, source: any) => any;
+export type ExtendJson = (destination: any, source: any) => any;

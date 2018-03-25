@@ -1,9 +1,9 @@
-import { extendConfigs } from '../extendConfigs';
+import { extendJson } from '../extendJson';
 
-describe('extendConfigs of validate-filenames', () => {
+describe('extendJson of validate-filenames', () => {
   it('works 1', () => {
     expect(
-      extendConfigs(
+      extendJson(
         {
           rules: [
             {

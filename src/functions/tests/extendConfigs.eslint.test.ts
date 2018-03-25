@@ -1,9 +1,9 @@
-import { extendConfigs } from '../extendConfigs';
+import { extendJson } from '../extendJson';
 
-describe('extendConfigs of eslint files', () => {
+describe('extendJson of eslint files', () => {
   it('works 1', () => {
     expect(
-      extendConfigs(
+      extendJson(
         {
           plugins: ['graphql'],
           rules: {

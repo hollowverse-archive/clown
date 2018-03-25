@@ -1,11 +1,11 @@
 import * as _ from 'lodash';
-import { ExtendConfigs } from './types';
+import { ExtendJson } from './types';
 import { guessKeyWithUniqueValue } from './utils';
 
 export function extendArraysOfObjects(
   destination: object[],
   source: object[],
-  extendConfigs: ExtendConfigs,
+  extendJson: ExtendJson,
 ) {
   /* In this function we handle config arrays that look like this:
 
@@ -67,7 +67,7 @@ export function extendArraysOfObjects(
     /* We use `reduceRight` so that we start from the end so that the last values overwrite
     earlier values */
     return _.reduceRight(arrOfObjs, (acc, obj) => {
-      return extendConfigs(obj, acc);
+      return extendJson(obj, acc);
     });
   });
 

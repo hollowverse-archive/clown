@@ -1,9 +1,9 @@
-import { extendConfigs } from '../extendConfigs';
+import { extendJson } from '../extendJson';
 
-describe.only('extendConfigs of stylelintrc', () => {
+describe.only('extendJson of stylelintrc', () => {
   it('works 1', () => {
     expect(
-      extendConfigs(
+      extendJson(
         {
           plugins: ['stylelint-no-unsupported-browser-features'],
           rules: {

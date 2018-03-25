@@ -1,9 +1,9 @@
-import { extendConfigs } from '../extendConfigs';
+import { extendJson } from '../extendJson';
 
-describe('extendConfigs of tsconfig.json files', () => {
+describe('extendJson of tsconfig.json files', () => {
   it('works 1', () => {
     expect(
-      extendConfigs(
+      extendJson(
         {
           compilerOptions: {
             checkJs: true,

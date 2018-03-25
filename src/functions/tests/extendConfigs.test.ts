@@ -1,53 +1,43 @@
-import { extendConfigs } from '../extendConfigs';
+import { extendJson } from '../extendJson';
 
-describe('extendConfigs', () => {
+describe('extendJson', () => {
   describe('merging primitives', () => {
     it('returns the source string when merging strings', () => {
-      expect(extendConfigs('foo', 'bar')).toEqual('bar');
+      expect(extendJson('foo', 'bar')).toEqual('bar');
     });
 
     it('returns the source number when merging numbers', () => {
-      expect(extendConfigs(1, 2)).toEqual(2);
+      expect(extendJson(1, 2)).toEqual(2);
     });
 
     it('returns the source boolean when merging booleans', () => {
-      expect(extendConfigs(true, false)).toEqual(false);
+      expect(extendJson(true, false)).toEqual(false);
     });
 
     it('returns the source value when given falsy values', () => {
-      expect(extendConfigs(null, undefined)).toEqual(undefined);
-      expect(extendConfigs(undefined, null)).toEqual(null);
-      expect(extendConfigs(NaN, null)).toEqual(null);
-      expect(extendConfigs(null, NaN)).toEqual(NaN);
+      expect(extendJson(null, undefined)).toEqual(undefined);
+      expect(extendJson(undefined, null)).toEqual(null);
+      expect(extendJson(NaN, null)).toEqual(null);
+      expect(extendJson(null, NaN)).toEqual(NaN);
     });
   });
 
   describe('merging arrays of unmergeables', () => {
     it('spreads the content into a single array and runs _.uniq on them', () => {
-      expect(extendConfigs([1, 2, 3], [4, 5, 6, 1])).toEqual([
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-      ]);
+      expect(extendJson([1, 2, 3], [4, 5, 6, 1])).toEqual([1, 2, 3, 4, 5, 6]);
     });
   });
 
   describe('merging arrays of objects', () => {
     it('works 1', () => {
       expect(
-        extendConfigs(
-          [{ x: '1', y: [1, 2, 6] }],
-          [{ x: '1', y: [1, 2, 3, 4] }],
-        ),
+        extendJson([{ x: '1', y: [1, 2, 6] }], [{ x: '1', y: [1, 2, 3, 4] }]),
       ).toEqual([{ x: '1', y: [1, 2, 6, 3, 4] }]);
     });
 
     it('works 2', () => {
       expect(
-        extendConfigs(
+        extendJson(
           [
             { x: 'a', y: ['foo', 'bar', 'baz'], z: 'ff', k: 12 },
             { x: 'b', y: ['1foo', '1bar', '1baz'], z: 'ff' },
@@ -105,20 +95,20 @@ describe('extendConfigs', () => {
         },
       ];
 
-      expect(extendConfigs(config1, config2)).toEqual(result);
+      expect(extendJson(config1, config2)).toEqual(result);
     });
   });
 
   describe('merging plain objects', () => {
     it('works 1', () => {
-      expect(extendConfigs({ hi: 1 }, { ho: 2 })).toEqual({
+      expect(extendJson({ hi: 1 }, { ho: 2 })).toEqual({
         hi: 1,
         ho: 2,
       });
     });
 
     it('works 2', () => {
-      expect(extendConfigs({ a: 1 }, { b: 2, c: 3 })).toEqual({
+      expect(extendJson({ a: 1 }, { b: 2, c: 3 })).toEqual({
         a: 1,
         b: 2,
         c: 3,
@@ -126,7 +116,7 @@ describe('extendConfigs', () => {
     });
 
     it('works 3', () => {
-      expect(extendConfigs({ a: 1, b: { c: 1 } }, { b: 2, c: 4 })).toEqual({
+      expect(extendJson({ a: 1, b: { c: 1 } }, { b: 2, c: 4 })).toEqual({
         a: 1,
         b: 2,
         c: 4,
@@ -134,7 +124,7 @@ describe('extendConfigs', () => {
     });
 
     it('works 4', () => {
-      expect(extendConfigs({ a: 1, b: { c: 1 } }, { b: { c: 4 } })).toEqual({
+      expect(extendJson({ a: 1, b: { c: 1 } }, { b: { c: 4 } })).toEqual({
         a: 1,
         b: {
           c: 4,

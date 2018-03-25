@@ -1,9 +1,9 @@
-import { extendConfigs } from '../extendConfigs';
+import { extendJson } from '../extendJson';
 
-describe('extendConfigs of package.json files', () => {
+describe('extendJson of package.json files', () => {
   it('works 1', () => {
     expect(
-      extendConfigs(
+      extendJson(
         {
           name: 'hollowverse',
           version: '1.0.0',

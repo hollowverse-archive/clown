@@ -6,7 +6,7 @@ import {
 } from './utils';
 import { extendArraysOfObjects } from './extendArraysOfObjects';
 
-export function extendConfigs(destination: any, source: any): any {
+export function extendJson(destination: any, source: any): any {
   const configs = [destination, source];
 
   if (_.every(configs, isUnmergeable)) {
@@ -18,7 +18,7 @@ export function extendConfigs(destination: any, source: any): any {
   }
 
   if (_.every(configs, isArrayOfObjects)) {
-    return extendArraysOfObjects(destination, source, extendConfigs);
+    return extendArraysOfObjects(destination, source, extendJson);
   }
 
   if (_.every(configs, _.isPlainObject)) {
@@ -31,7 +31,7 @@ export function extendConfigs(destination: any, source: any): any {
         return destination[key];
       }
 
-      return extendConfigs(destination[key], source[key]);
+      return extendJson(destination[key], source[key]);
     });
   }
 
