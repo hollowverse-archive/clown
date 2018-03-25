@@ -2,10 +2,10 @@
   "extends": "./node_modules/@hollowverse/common/tsconfig.json",
   "compilerOptions": {
     "maxNodeModuleJsDepth": 2,
+    "sourceMap": false,
     "outDir": "./bin",
     "module": "esnext",
     "sourceRoot": "./src",
-    "mapRoot": "./src",
     "inlineSourceMap": true,
     "inlineSources": true
   },

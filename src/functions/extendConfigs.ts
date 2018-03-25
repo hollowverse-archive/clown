@@ -6,7 +6,7 @@ import {
 } from './utils';
 import { extendArraysOfObjects } from './extendArraysOfObjects';
 
-export function extendConfigs(destination: any, source: any) {
+export function extendConfigs(destination: any, source: any): any {
   const configs = [destination, source];
 
   if (_.every(configs, isUnmergeable)) {
@@ -22,7 +22,7 @@ export function extendConfigs(destination: any, source: any) {
   }
 
   if (_.every(configs, _.isPlainObject)) {
-    return _.mapValues({ ...destination, ...source }, (val, key) => {
+    return _.mapValues({ ...destination, ...source }, (_1, key) => {
       if (destination[key] === undefined) {
         return source[key];
       }

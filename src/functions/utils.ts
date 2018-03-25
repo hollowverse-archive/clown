@@ -19,7 +19,7 @@ export function isArrayOfStrings(value: any[]): value is string[] {
 
 export function guessKeyWithUniqueValue(records: object[]) {
   const sampleRecord = records[0];
-  const potentialKeys = _.mapValues(sampleRecord, (val, key) =>
+  const potentialKeys = _.mapValues(sampleRecord, (_1, key) =>
     keyIsPotentialId(records, key),
   );
 
