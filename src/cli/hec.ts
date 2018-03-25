@@ -13,6 +13,8 @@ import bluebird from 'bluebird';
 import _ from 'lodash';
 import realmkdirp from 'mkdirp';
 import { promisify } from 'util';
+import { extendJson } from '../functions/extendJson';
+import { extendDotIgnore } from '../functions/extendDotIgnore';
 
 const mkdirp = promisify(realmkdirp);
 
@@ -106,7 +108,7 @@ async function main() {
     }
 
     if (isDotIgnoreFile(path.basename(destinationFilePath))) {
-      const extendedContent = extendDotIgnoreFile(
+      const extendedContent = extendDotIgnore(
         destinationFileContent,
         sourceFileContent,
       );

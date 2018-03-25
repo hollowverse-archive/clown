@@ -55,8 +55,10 @@
     "babel-polyfill": "^6.26.0",
     "bluebird": "^3.5.1",
     "commander": "^2.12.1",
+    "common-tags": "^1.7.2",
     "glob": "^7.1.2",
     "globby": "^8.0.1",
+    "ignore": "^3.3.7",
     "lodash": "^4.17.4",
     "minimatch": "^3.0.4",
     "mkdirp": "^0.5.1",
@@ -65,6 +67,7 @@
   "devDependencies": {
     "@types/bluebird": "^3.5.20",
     "@types/commander": "^2.11.0",
+    "@types/common-tags": "^1.4.0",
     "@types/glob": "^5.0.35",
     "@types/globby": "^6.1.0",
     "@types/jest": "^21.1.5",
@@ -98,9 +101,9 @@
   },
   "jest": {
     "transform": {
-      "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+      "^.+\\.tsx?$": "ts-jest"
     },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "testRegex": "(/src/.*(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
     "moduleFileExtensions": [
       "ts",
       "tsx",

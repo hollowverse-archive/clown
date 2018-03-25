@@ -2,13 +2,9 @@
   "extends": "./node_modules/@hollowverse/common/tsconfig.json",
   "compilerOptions": {
     "maxNodeModuleJsDepth": 2,
-    "sourceMap": false,
     "outDir": "./bin",
     "module": "commonjs",
-    "sourceRoot": "./src",
-    "inlineSourceMap": true,
-    "inlineSources": true,
-    "noEmitOnError": false
+    "sourceMap": true
   },
   "include": ["src"]
 }
