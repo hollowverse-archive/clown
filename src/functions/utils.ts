@@ -1,10 +1,10 @@
 import * as _ from 'lodash';
 
-export function isArrayOfObjects(value: any[]): value is object[] {
+export function isArrayOfObjects(value: any[]) {
   return _.isArray(value) && _.every(value, _.isObject);
 }
 
-export function keyIsPotentialId(arrayOfObjects: object[], key: string) {
+export function keyIsPotentialId(arrayOfObjects: any[], key: string) {
   const valuesOfKey = arrayOfObjects.map((obj: any) => obj[key]);
 
   return (
@@ -17,7 +17,7 @@ export function isArrayOfStrings(value: any[]): value is string[] {
   return _.isArray(value) && _.every(value, _.isString);
 }
 
-export function guessKeyWithUniqueValue(records: object[]) {
+export function guessKeyWithUniqueValue(records: any[]) {
   const sampleRecord = records[0];
   const potentialKeys = _.mapValues(sampleRecord, (_1, key) =>
     keyIsPotentialId(records, key),

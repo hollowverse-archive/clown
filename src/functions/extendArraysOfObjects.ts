@@ -3,8 +3,8 @@ import { ExtendJson } from './types';
 import { guessKeyWithUniqueValue } from './utils';
 
 export function extendArraysOfObjects(
-  destination: object[],
-  source: object[],
+  destination: any[],
+  source: any[],
   extendJson: ExtendJson,
 ) {
   /* In this function we handle config arrays that look like this:

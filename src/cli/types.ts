@@ -3,4 +3,13 @@ export type HecConfig = {
   extensions: string[];
 };
 
-export type ExtensionPathsAndSourceFile = [string, string[]];
+export type ExtensionPathAndSourceFiles = [string, string[]];
+
+export type Change = {
+  content: string;
+  type: 'json' | 'dotIgnore' | 'unknown';
+};
+
+export type Changes = {
+  [destinationPath: string]: Change;
+};
