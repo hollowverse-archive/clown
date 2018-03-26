@@ -2,18 +2,27 @@ import { HecConfig } from './types';
 import _ from 'lodash';
 import fs from 'fs';
 import { promisify } from 'util';
+import realWriteJsonFile from 'write-json-file';
 
 const promisifiedReadFile = promisify(fs.readFile);
 const promisifiedWriteFile = promisify(fs.writeFile);
 
-export async function writeFile(filePath: string, fileContent: string) {
-  return await promisifiedWriteFile(filePath, fileContent, 'utf8');
+export function writeJsonFile(filePath: string, json: {}) {
+  return realWriteJsonFile(filePath, json, {
+    indent: ' ',
+    detectIndent: true,
+  });
+}
+
+export function writeFile(filePath: string, fileContent: string) {
+  return promisifiedWriteFile(filePath, fileContent, 'utf8');
 }
 
 export async function readFile(filePath: string) {
   try {
     return await promisifiedReadFile(filePath, 'utf8');
   } catch (e) {
+    console.log('e', e);
     return undefined;
   }
 }

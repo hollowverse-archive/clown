@@ -28,4 +28,29 @@ describe('extendDotIgnore', () => {
       bin
     `);
   });
+
+  it('works 2', async () => {
+    const destination = stripIndents`
+      # comment
+      node_modules
+
+      # another comment
+      .idea
+    `;
+    const source = stripIndents`
+      # comment
+      node_modules
+
+      # another comment
+      .idea
+    `;
+
+    expect(extendDotIgnore(destination, source)).toEqual(stripIndents`
+      # comment
+      node_modules
+
+      # another comment
+      .idea
+    `);
+  });
 });

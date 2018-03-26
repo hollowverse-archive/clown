@@ -4,7 +4,8 @@
     "maxNodeModuleJsDepth": 2,
     "outDir": "./bin",
     "module": "commonjs",
-    "sourceMap": true
+    "sourceMap": true,
+    "noEmitOnError": false
   },
   "include": ["src"]
 }
