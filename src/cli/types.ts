@@ -1,5 +1,4 @@
-export type HecConfig = {
-  extensionsModule: string;
+export type ClownConfig = {
   extensions: string[];
 };
 

@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "husky": "^0.15.0-rc.8"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint-staged"
+    }
+  }
+}

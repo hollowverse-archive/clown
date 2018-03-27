@@ -19,12 +19,12 @@ import bluebird from 'bluebird';
 
 const mkdirp = promisify(realmkdirp);
 
-export async function extendConfig() {
-  const changes = await getChanges();
-  const iterableChanges = (_.map(changes, (change, destinationPath) => ({
+export async function extendConfig(cwd: string) {
+  const changes = await getChanges(cwd);
+  const iterableChanges = _.map(changes, (change, destinationPath) => ({
     destinationPath,
     change,
-  })) as any) as { destinationPath: string; change: Change }[];
+  }));
 
   return await bluebird.each(
     iterableChanges,

@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "lint-staged": "lint-staged"
+  },
+  "devDependencies": {
+    "lint-staged": "^7.0.0"
+  }
+}

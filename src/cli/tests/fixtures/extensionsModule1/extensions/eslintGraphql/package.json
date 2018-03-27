@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "eslint-plugin-graphql": "^1.5.0"
+  }
+}

@@ -1,4 +1,4 @@
-import { HecConfig, ExtensionPathAndSourceFiles } from './types';
+import { ClownConfig, ExtensionPathAndSourceFiles } from './types';
 import _ from 'lodash';
 import fs from 'fs';
 import { promisify } from 'util';
@@ -30,15 +30,14 @@ export async function readFile(filePath: string) {
   }
 }
 
-export function verifyHecConfigLooksGood(hecConfig: HecConfig) {
+export function verifyClownConfigLooksGood(clownConfig: ClownConfig) {
   const looksGood =
-    _.isPlainObject(hecConfig) &&
-    _.isString(hecConfig.extensionsModule) &&
-    _.isArray(hecConfig.extensions) &&
-    _.isString(hecConfig.extensions[0]);
+    _.isPlainObject(clownConfig) &&
+    _.isArray(clownConfig.extensions) &&
+    _.isString(clownConfig.extensions[0]);
 
   if (!looksGood) {
-    throw new Error('hec.js file does not look valid');
+    throw new Error('clown.js file does not look valid');
   }
 }
 

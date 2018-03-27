@@ -16,8 +16,10 @@ import { stripIndents } from 'common-tags';
 import bluebird from 'bluebird';
 import { Changes, ExtensionPathAndSourceFiles } from './types';
 
-export async function getChanges() {
-  const extensionPathsAndSourceFiles = await getExtensionPathsAndSourceFiles();
+export async function getChanges(cwd: string) {
+  const extensionPathsAndSourceFiles = await getExtensionPathsAndSourceFiles(
+    cwd,
+  );
 
   return bluebird.reduce(
     extensionPathsAndSourceFiles,

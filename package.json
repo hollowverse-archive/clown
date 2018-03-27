@@ -1,8 +1,8 @@
 {
-  "name": "@hollowverse/extend-config",
+  "name": "@hollowverse/clown",
   "version": "1.0.0",
-  "description": "Simple scaffolding and configuration synchronization tool",
-  "repository": "git@github.com:hollowverse/configurator.git",
+  "description": "CLI to extend config files and scaffold projects",
+  "repository": "git@github.com:hollowverse/clown.git",
   "author": "Hollowverse",
   "license": "Unlicense",
   "scripts": {
@@ -16,7 +16,7 @@
     "access": "public"
   },
   "bin": {
-    "hvc": "./bin/src/hec.js"
+    "clown": "./bin/src/clown.js"
   },
   "eslintIgnore": [
     "bin/**/*"

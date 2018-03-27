@@ -13,7 +13,7 @@ export function keyIsPotentialId(arrayOfObjects: any[], key: string) {
   );
 }
 
-export function isArrayOfStrings(value: any[]): value is string[] {
+export function isArrayOfStrings(value: any[]) {
   return _.isArray(value) && _.every(value, _.isString);
 }
 
