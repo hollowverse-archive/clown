@@ -6,9 +6,12 @@ import realWriteJsonFile from 'write-json-file';
 import bluebird from 'bluebird';
 import path from 'path';
 import { stripIndents } from 'common-tags';
+import realmkdirp from 'mkdirp';
 
 const promisifiedReadFile = promisify(fs.readFile);
 const promisifiedWriteFile = promisify(fs.writeFile);
+
+export const mkdirp = promisify(realmkdirp);
 
 export function writeJsonFile(filePath: string, json: {}) {
   return realWriteJsonFile(filePath, json, {

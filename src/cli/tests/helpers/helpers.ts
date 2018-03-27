@@ -1,3 +1,4 @@
 import path from 'path';
 
-export const tempFixturesDir = path.resolve(__filename, '..', 'temp');
+export const fixturesDir = path.resolve(__filename, '..', 'fixtures');
+export const tempDir = path.resolve(__filename, '..', 'temp');

@@ -2,24 +2,28 @@ import {
   cleanupTempProject,
   createTempProject,
 } from './helpers/createTempProject';
-import { tempFixturesDir } from './helpers/helpers';
+import { tempDir } from './helpers/helpers';
 import { extendConfig } from '../extendConfig';
 import path from 'path';
+import fs from 'fs-extra';
+import { readFile } from '../utils';
 
 const cwd = __filename;
 
 describe('use case 1', () => {
   describe('extending a project', () => {
     it('works 1', async () => {
-      await createTempProject('project1');
+      const tempProject = path.resolve(tempDir, 'project1');
 
-      await extendConfig(path.resolve(tempFixturesDir, 'project1'));
+      await createTempProject('project1', 'extensionsModule1');
 
-      await cleanupTempProject('project1');
-      // copy use-case from fixtures to a temp test directory.
-      // mock `process.cwd()` to point to a temp test directory.
-      // Run `extendConfig`
-      // make assertions
+      await extendConfig(tempProject);
+
+      const pkgjson = await readFile(path.resolve(tempProject, 'package.json'));
+
+      console.log('pkgJson', pkgjson);
+
+      await cleanupTempProject('project1', 'extensionsModule1');
     });
   });
 });
