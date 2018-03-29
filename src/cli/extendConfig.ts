@@ -1,23 +1,9 @@
 import path from 'path';
-import {
-  iterateOverSourceAndDestinationFiles,
-  isMergeableJsonContent,
-  writeFile,
-  writeJsonFile,
-  isDotIgnoreFile,
-} from './utils';
-import realmkdirp from 'mkdirp';
-import { promisify } from 'util';
-import { extendJson } from '../functions/extendJson';
-import { extendDotIgnore } from '../functions/extendDotIgnore';
-import { getExtensionPathsAndSourceFiles } from './getExtensionPathsAndSourceFiles';
-import { stripIndents } from 'common-tags';
+import { writeFile, writeJsonFile } from './utils';
 import { getChanges } from './getChanges';
 import _ from 'lodash';
-import { Change } from './types';
 import bluebird from 'bluebird';
-
-const mkdirp = promisify(realmkdirp);
+import fs from 'fs-extra';
 
 export async function extendConfig(cwd: string) {
   const changes = await getChanges(cwd);
@@ -29,7 +15,7 @@ export async function extendConfig(cwd: string) {
   return await bluebird.each(
     iterableChanges,
     async ({ destinationPath, change: { content, type } }) => {
-      await mkdirp(path.dirname(destinationPath));
+      await fs.mkdirp(path.dirname(destinationPath));
 
       if (type === 'json') {
         return writeJsonFile(destinationPath, JSON.parse(content));

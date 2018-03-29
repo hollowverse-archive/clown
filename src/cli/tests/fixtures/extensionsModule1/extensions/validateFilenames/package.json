@@ -1,8 +1,0 @@
-{
-  "scripts": {
-    "validate-filenames": "validate-filenames -c commonconfig.js"
-  },
-  "devDependencies": {
-    "@hollowverse/validate-filenames": "^1.3.7"
-  }
-}

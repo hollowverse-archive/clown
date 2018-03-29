@@ -1,7 +1,7 @@
 {
   "name": "@hollowverse/clown",
   "version": "1.0.0",
-  "description": "CLI to extend config files and scaffold projects",
+  "description": "CLI for scaffolding projects and juggling common configurations",
   "repository": "git@github.com:hollowverse/clown.git",
   "author": "Hollowverse",
   "license": "Unlicense",

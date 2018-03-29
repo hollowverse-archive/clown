@@ -1,18 +1,13 @@
 import path from 'path';
 import {
-  iterateOverSourceAndDestinationFiles,
   isMergeableJsonContent,
-  writeFile,
-  writeJsonFile,
   isDotIgnoreFile,
   readFile,
+  getClownConfigPath,
 } from './utils';
-import realmkdirp from 'mkdirp';
-import { promisify } from 'util';
 import { extendJson } from '../functions/extendJson';
 import { extendDotIgnore } from '../functions/extendDotIgnore';
 import { getExtensionPathsAndSourceFiles } from './getExtensionPathsAndSourceFiles';
-import { stripIndents } from 'common-tags';
 import bluebird from 'bluebird';
 import { Changes, ExtensionPathAndSourceFiles } from './types';
 
@@ -27,6 +22,8 @@ export async function getChanges(cwd: string) {
       changes: Changes,
       [extensionPath, sourceFiles]: ExtensionPathAndSourceFiles,
     ) => {
+      const clownConfigPath = getClownConfigPath(cwd);
+
       await bluebird.each(sourceFiles, async sourceFile => {
         const sourceFilePath = path.resolve(extensionPath, sourceFile);
         const sourceFileContent = await readFile(sourceFilePath);
@@ -37,7 +34,10 @@ export async function getChanges(cwd: string) {
           );
         }
 
-        const destinationFilePath = path.resolve(process.cwd(), sourceFile);
+        const destinationFilePath = path.resolve(
+          path.dirname(clownConfigPath),
+          sourceFile,
+        );
 
         if (changes[destinationFilePath] === undefined) {
           const destinationFileContent = await readFile(destinationFilePath);

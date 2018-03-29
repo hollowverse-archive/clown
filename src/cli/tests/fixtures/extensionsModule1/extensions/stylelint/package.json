@@ -1,8 +1,0 @@
-{
-  "devDependencies": {
-    "@types/stylelint": "^7.10.0",
-    "stylelint": "^8.4.0",
-    "stylelint-config-standard": "^17.0.0",
-    "stylelint-no-unsupported-browser-features": "^1.0.0"
-  }
-}

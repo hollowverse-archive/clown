@@ -1,9 +1,0 @@
-{
-  "lint-staged": {
-    "**/**/*.{s,}css": [
-      "stylelint --syntax scss",
-      "prettier --write",
-      "git add"
-    ]
-  }
-}

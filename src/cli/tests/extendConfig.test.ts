@@ -1,29 +1,31 @@
-import {
-  cleanupTempProject,
-  createTempProject,
-} from './helpers/createTempProject';
-import { tempDir } from './helpers/helpers';
 import { extendConfig } from '../extendConfig';
-import path from 'path';
-import fs from 'fs-extra';
-import { readFile } from '../utils';
+import { disk } from '../../../__mocks__/Disk';
 
-const cwd = __filename;
+const files = {
+  '/clown.js': {
+    extensions: ['/clownExtensionA'],
+  },
+  '/clownExtensionA/package.json': `{
+    "foo": "bar"
+  }`,
+  '/package.json': `{
+    "name": "Stuff"
+  }`,
+};
+
+const results = {
+  '/package.json': `{
+    "name": "Stuff",
+    "foo": "bar"
+}\n`,
+};
+
+disk.setContent(files);
 
 describe('use case 1', () => {
-  describe('extending a project', () => {
-    it('works 1', async () => {
-      const tempProject = path.resolve(tempDir, 'project1');
+  it('works 1', async () => {
+    await extendConfig('/');
 
-      await createTempProject('project1', 'extensionsModule1');
-
-      await extendConfig(tempProject);
-
-      const pkgjson = await readFile(path.resolve(tempProject, 'package.json'));
-
-      console.log('pkgJson', pkgjson);
-
-      await cleanupTempProject('project1', 'extensionsModule1');
-    });
+    expect(await disk.read('/package.json')).toEqual(results['/package.json']);
   });
 });
