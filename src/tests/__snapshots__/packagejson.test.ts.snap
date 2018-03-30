@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`package.json use case 1 1`] = `
+"{
+  \\"name\\": \\"foo\\",
+  \\"version\\": \\"1.0.0\\",
+  \\"description\\": \\"foo.com\\",
+  \\"main\\": \\"index.js\\",
+  \\"repository\\": \\"https://foo.com/foo.git\\",
+  \\"scripts\\": {
+    \\"scriptA\\": \\"do the other thing\\",
+    \\"scriptB\\": \\"script b\\",
+    \\"scriptC\\": \\"script c\\",
+    \\"scriptD\\": \\"script d\\"
+  },
+  \\"homepage\\": \\"https://foo.com/foo#readme\\",
+  \\"dependencies\\": {
+    \\"dep-a\\": \\"^10.0.0\\",
+    \\"dep-b\\": \\"^2.0.0\\",
+    \\"dep-c\\": \\"^3.0.0\\",
+    \\"dep-d\\": \\"^1.0.0\\"
+  },
+  \\"devDependencies\\": {
+    \\"dev-dep-a\\": \\"^4.0.0\\",
+    \\"dev-dep-b\\": \\"^1.0.0\\"
+  },
+  \\"engines\\": {
+    \\"node\\": \\">= 9.2\\"
+  },
+  \\"license\\": \\"Unlicense\\"
+}
+"
+`;
