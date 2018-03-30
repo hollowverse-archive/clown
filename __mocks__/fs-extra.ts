@@ -14,6 +14,7 @@ function writeFile(filePath, fileContent) {
   disk.write(filePath, fileContent);
 }
 
+fs['writeFile'] = writeFile;
 fs['readFile'] = readFile;
 fs['readJson'] = readJson;
 fs['mkdirp'] = () => null;
