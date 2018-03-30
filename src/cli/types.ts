@@ -4,11 +4,11 @@ export type ClownConfig = {
 
 export type ExtensionPathAndSourceFiles = [string, string[]];
 
-export type Change = {
+export type FileContent = {
   content: string;
   type: 'json' | 'dotIgnore' | 'unknown';
 };
 
-export type Changes = {
-  [destinationPath: string]: Change;
+export type FileContents = {
+  [destinationPath: string]: FileContent;
 };

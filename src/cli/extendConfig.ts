@@ -1,12 +1,12 @@
 import path from 'path';
 import { writeFile, writeJsonFile } from './utils';
-import { getChanges } from './getChanges';
+import { computeFileContents } from './getChanges';
 import _ from 'lodash';
 import bluebird from 'bluebird';
 import fs from 'fs-extra';
 
 export async function extendConfig(cwd: string) {
-  const changes = await getChanges(cwd);
+  const changes = await computeFileContents(cwd);
   const iterableChanges = _.map(changes, (change, destinationPath) => ({
     destinationPath,
     change,
