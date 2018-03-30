@@ -1,5 +1,5 @@
 import path from 'path';
-import { disk } from './Disk';
+import { disk } from '../mockHelpers/Disk';
 import _ from 'lodash';
 
 module.exports = jest.fn((_1: string, { cwd }: any) => {

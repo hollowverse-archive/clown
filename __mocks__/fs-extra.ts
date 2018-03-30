@@ -1,4 +1,4 @@
-import { disk } from './Disk';
+import { disk } from '../mockHelpers/Disk';
 
 const fs = jest.genMockFromModule('fs-extra');
 

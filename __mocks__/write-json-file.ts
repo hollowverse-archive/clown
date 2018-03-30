@@ -1,5 +1,5 @@
 /* Mostly copied from the source code of `wirte-json-file` and then modified */
-import { disk } from './Disk';
+import { disk } from '../mockHelpers/Disk';
 const path = require('path');
 const sortKeys = require('sort-keys');
 const pify = require('pify');
