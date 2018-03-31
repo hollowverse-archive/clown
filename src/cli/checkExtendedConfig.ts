@@ -67,7 +67,6 @@ export async function checkExtendedConfig(cwd: string) {
   if (_.isEmpty(discrepancies)) {
     process.exit(0);
   } else {
-    console.log('=\nFILE: checkExtendedConfig.ts\nLINE: 71\n=');
     printErrors(discrepancies);
     process.exit(1);
   }

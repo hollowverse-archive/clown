@@ -1,8 +1,9 @@
 import { checkExtendedConfig } from '../cli/checkExtendedConfig';
-import { readJsonNoDoubleQuotes } from '../../mockAndTestHelpers/readJsonNoDoubleQuotes';
 import { vol } from '@forabi/memfs';
 
-describe('Basics', () => {
+const { printErrors } = require('../cli/printErrors');
+
+describe('checkExtendedConfig basics', () => {
   it('use case 1', async () => {
     const files = {
       '/clown.js': `{
@@ -26,7 +27,6 @@ describe('Basics', () => {
 
     await checkExtendedConfig('/');
 
-    expect(true).toEqual(true);
-    // expect(readJsonNoDoubleQuotes('/package.json')).toMatchSnapshot();
+    expect(printErrors.mock.calls).toMatchSnapshot();
   });
 });
