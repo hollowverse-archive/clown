@@ -3,6 +3,10 @@ import { readJsonNoDoubleQuotes } from '../../mockAndTestHelpers/readJsonNoDoubl
 import { vol } from '@forabi/memfs';
 
 describe('.stylelintrc', () => {
+  beforeEach(() => {
+    vol.reset();
+  });
+
   it('use case 1', async () => {
     const files = {
       '/clown.json': `{

@@ -1,11 +1,11 @@
 import { extendConfig } from '../cli/extendConfig';
 import { vol, fs } from '@forabi/memfs';
 
-beforeEach(() => {
-  vol.reset();
-});
-
 describe('dot ignore', () => {
+  beforeEach(() => {
+    vol.reset();
+  });
+
   test('merges the lines', async () => {
     const files = {
       '/clown.json': `{

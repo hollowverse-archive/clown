@@ -4,6 +4,10 @@ import { vol } from '@forabi/memfs';
 const { printErrors } = require('../cli/printErrors');
 
 describe('checkExtendedConfig basics', () => {
+  beforeEach(() => {
+    vol.reset();
+  });
+
   it('use case 1', async () => {
     const files = {
       '/clown.json': `{

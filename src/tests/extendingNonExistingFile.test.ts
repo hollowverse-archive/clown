@@ -3,6 +3,10 @@ import { readJsonNoDoubleQuotes } from '../../mockAndTestHelpers/readJsonNoDoubl
 import { vol } from '@forabi/memfs';
 
 describe('Extending non-existing file', () => {
+  beforeEach(() => {
+    vol.reset();
+  });
+
   it('creates a file if it does not exist', async () => {
     const files = {
       '/clown.json': `{
