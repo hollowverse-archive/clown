@@ -5,14 +5,8 @@ import bluebird from 'bluebird';
 import { patchFs } from 'fs-monkey';
 import { fs } from '@forabi/memfs';
 import { extendConfig } from './extendConfig';
-
-type DestinationContent = { [filePath: string]: string | undefined };
-type Discrepancies = {
-  [destinationFilePath: string]: {
-    expected: string;
-    received: string | undefined;
-  };
-};
+import { DestinationContent, Discrepancies } from './types';
+import { printErrors } from './printErrors';
 
 export async function checkExtendedConfig(cwd: string) {
   /* We need to check if the content that currently exists on disk is the same as the content
@@ -70,5 +64,11 @@ export async function checkExtendedConfig(cwd: string) {
     {},
   );
 
-  console.log(discrepancies);
+  if (_.isEmpty(discrepancies)) {
+    process.exit(0);
+  } else {
+    console.log('=\nFILE: checkExtendedConfig.ts\nLINE: 71\n=');
+    printErrors(discrepancies);
+    process.exit(1);
+  }
 }

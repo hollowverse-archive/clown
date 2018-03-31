@@ -12,3 +12,12 @@ export type FileContent = {
 export type FileContents = {
   [destinationPath: string]: FileContent;
 };
+
+export type DestinationContent = { [filePath: string]: string | undefined };
+
+export type Discrepancies = {
+  [destinationFilePath: string]: {
+    expected: string;
+    received: string | undefined;
+  };
+};

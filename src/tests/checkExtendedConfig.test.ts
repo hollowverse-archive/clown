@@ -11,8 +11,14 @@ describe('Basics', () => {
       '/clownExtensionA/package.json': `{
         "foo": "bar"
       }`,
+      '/clownExtensionA/eslintrc.json': `{
+        "rules": "ok"
+      }`,
       '/package.json': `{
         "name": "Stuff"
+      }`,
+      '/eslintrc.json': `{
+        "extends": "someFoo"
       }`,
     };
 
