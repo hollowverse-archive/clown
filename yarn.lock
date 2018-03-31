@@ -9,6 +9,13 @@
     core-js "^2.5.3"
     regenerator-runtime "^0.11.1"
 
+"@forabi/memfs@^2.7.2":
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/@forabi/memfs/-/memfs-2.7.2.tgz#87e7176076adb103f24b0c015c782af35c47fb5c"
+  dependencies:
+    fast-extend "0.0.2"
+    fs-monkey "^0.3.0"
+
 "@hollowverse/common@hollowverse/common":
   version "3.2.7"
   resolved "https://codeload.github.com/hollowverse/common/tar.gz/3d237300adc351eb81a8f07d0d876e8ae2fc60b2"
@@ -2045,6 +2052,10 @@ fast-deep-equal@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-1.1.0.tgz#c053477817c86b51daa853c81e059b733d023614"
 
+fast-extend@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/fast-extend/-/fast-extend-0.0.2.tgz#f5ec42cf40b9460f521a6387dfb52deeed671dbd"
+
 fast-glob@^2.0.2:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-2.2.0.tgz#e9d032a69b86bef46fc03d935408f02fb211d9fc"
@@ -2212,6 +2223,10 @@ fs-extra@^5.0.0:
     graceful-fs "^4.1.2"
     jsonfile "^4.0.0"
     universalify "^0.1.0"
+
+fs-monkey@^0.3.0:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/fs-monkey/-/fs-monkey-0.3.1.tgz#69edd8420e04da04d4d3ea200da1ccdc444eecd0"
 
 fs-readdir-recursive@^1.0.0:
   version "1.1.0"

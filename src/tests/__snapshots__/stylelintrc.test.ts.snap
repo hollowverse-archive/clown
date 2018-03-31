@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`package.json use case 1 1`] = `
+exports[`.stylelintrc use case 1 1`] = `
 "{
   'plugins': [
     'stylelint-no-unsupported-browser-features'

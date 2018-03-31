@@ -1,13 +1,13 @@
 import { extendConfig } from '../cli/extendConfig';
-import { disk } from '../../mockHelpers/Disk';
-import { getJsonContentFromDisk } from '../../mockHelpers/getJsonContentFromDisk';
+import { readJsonNoDoubleQuotes } from '../../mockAndTestHelpers/readJsonNoDoubleQuotes';
+import { vol } from '@forabi/memfs';
 
 describe('eslintrc.json', () => {
   it('use case 1', async () => {
     const files = {
-      '/clown.js': {
-        extensions: ['/clownExtensionA'],
-      },
+      '/clown.js': `{
+        "extensions": ["/clownExtensionA"]
+      }`,
       '/clownExtensionA/eslintrc.json': `{
         "plugins": ["plugin-required-for-react-i-guess"],
         "parser": "typescript-eslint-parser",
@@ -51,10 +51,10 @@ describe('eslintrc.json', () => {
       }`,
     };
 
-    disk.setContent(files);
+    vol.fromJSON(files);
 
     await extendConfig('/');
 
-    expect(await getJsonContentFromDisk('/eslintrc.json')).toMatchSnapshot();
+    expect(readJsonNoDoubleQuotes('/eslintrc.json')).toMatchSnapshot();
   });
 });

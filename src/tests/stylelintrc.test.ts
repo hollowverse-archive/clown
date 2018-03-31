@@ -1,13 +1,13 @@
 import { extendConfig } from '../cli/extendConfig';
-import { disk } from '../../mockHelpers/Disk';
-import { getJsonContentFromDisk } from '../../mockHelpers/getJsonContentFromDisk';
+import { readJsonNoDoubleQuotes } from '../../mockAndTestHelpers/readJsonNoDoubleQuotes';
+import { vol } from '@forabi/memfs';
 
-describe('package.json', () => {
+describe('.stylelintrc', () => {
   it('use case 1', async () => {
     const files = {
-      '/clown.js': {
-        extensions: ['/clownExtensionA'],
-      },
+      '/clown.js': `{
+        "extensions": ["/clownExtensionA"]
+      }`,
       '/clownExtensionA/.stylelintrc': `{
         "rules": {
           "plugin/no-unsupported-browser-features": [true, {
@@ -34,10 +34,10 @@ describe('package.json', () => {
       }`,
     };
 
-    disk.setContent(files);
+    vol.fromJSON(files);
 
     await extendConfig('/');
 
-    expect(await getJsonContentFromDisk('/.stylelintrc')).toMatchSnapshot();
+    expect(readJsonNoDoubleQuotes('/.stylelintrc')).toMatchSnapshot();
   });
 });

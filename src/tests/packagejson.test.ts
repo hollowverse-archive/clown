@@ -1,13 +1,13 @@
 import { extendConfig } from '../cli/extendConfig';
-import { disk } from '../../mockHelpers/Disk';
-import { getJsonContentFromDisk } from '../../mockHelpers/getJsonContentFromDisk';
+import { readJsonNoDoubleQuotes } from '../../mockAndTestHelpers/readJsonNoDoubleQuotes';
+import { vol } from '@forabi/memfs';
 
 describe('package.json', () => {
   it('use case 1', async () => {
     const files = {
-      '/clown.js': {
-        extensions: ['/clownExtensionA'],
-      },
+      '/clown.js': `{
+        "extensions": ["/clownExtensionA"]
+      }`,
       '/clownExtensionA/package.json': `{
         "scripts": {
           "scriptA": "do the other thing",
@@ -48,10 +48,10 @@ describe('package.json', () => {
       }`,
     };
 
-    disk.setContent(files);
+    vol.fromJSON(files);
 
     await extendConfig('/');
 
-    expect(await getJsonContentFromDisk('/package.json')).toMatchSnapshot();
+    expect(readJsonNoDoubleQuotes('/package.json')).toMatchSnapshot();
   });
 });

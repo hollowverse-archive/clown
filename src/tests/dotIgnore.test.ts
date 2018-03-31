@@ -1,13 +1,14 @@
 import { extendConfig } from '../cli/extendConfig';
-import { disk } from '../../mockHelpers/Disk';
+import { readJsonNoDoubleQuotes } from '../../mockAndTestHelpers/readJsonNoDoubleQuotes';
+import { vol } from '@forabi/memfs';
 import { stripIndents } from 'common-tags';
 
 describe('dot ignore', () => {
   test('use case 1', async () => {
     const files = {
-      '/clown.js': {
-        extensions: ['/clownExtensionA'],
-      },
+      '/clown.js': `{
+        "extensions": ["/clownExtensionA"]
+      }`,
       '/clownExtensionA/.gitignore': stripIndents`
         # new stuff
         bin
@@ -21,18 +22,18 @@ describe('dot ignore', () => {
       `,
     };
 
-    disk.setContent(files);
+    vol.fromJSON(files);
 
     await extendConfig('/');
 
-    expect(await disk.read('/.gitignore')).toMatchSnapshot();
+    expect(readJsonNoDoubleQuotes('/.gitignore')).toMatchSnapshot();
   });
 
   test('use case 2', async () => {
     const files = {
-      '/clown.js': {
-        extensions: ['/clownExtensionA'],
-      },
+      '/clown.js': `{
+        "extensions": ["/clownExtensionA"]
+      }`,
       '/clownExtensionA/.gitignore': stripIndents`
       # comment
       node_modules
@@ -49,10 +50,10 @@ describe('dot ignore', () => {
       `,
     };
 
-    disk.setContent(files);
+    vol.fromJSON(files);
 
     await extendConfig('/');
 
-    expect(await disk.read('/.gitignore')).toMatchSnapshot();
+    expect(readJsonNoDoubleQuotes('/.gitignore')).toMatchSnapshot();
   });
 });
