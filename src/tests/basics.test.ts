@@ -5,7 +5,7 @@ import { vol } from '@forabi/memfs';
 describe('Basics', () => {
   it('use case 1', async () => {
     const files = {
-      '/clown.js': `{
+      '/clown.json': `{
         "extensions": ["/clownExtensionA"]
       }`,
       '/clownExtensionA/package.json': `{

@@ -5,7 +5,7 @@ import { vol } from '@forabi/memfs';
 describe('eslintrc.json', () => {
   it('use case 1', async () => {
     const files = {
-      '/clown.js': `{
+      '/clown.json': `{
         "extensions": ["/clownExtensionA"]
       }`,
       '/clownExtensionA/eslintrc.json': `{

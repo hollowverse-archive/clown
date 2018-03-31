@@ -6,7 +6,7 @@ import { stripIndents } from 'common-tags';
 describe('dot ignore', () => {
   test('use case 1', async () => {
     const files = {
-      '/clown.js': `{
+      '/clown.json': `{
         "extensions": ["/clownExtensionA"]
       }`,
       '/clownExtensionA/.gitignore': stripIndents`
@@ -31,7 +31,7 @@ describe('dot ignore', () => {
 
   test('use case 2', async () => {
     const files = {
-      '/clown.js': `{
+      '/clown.json': `{
         "extensions": ["/clownExtensionA"]
       }`,
       '/clownExtensionA/.gitignore': stripIndents`

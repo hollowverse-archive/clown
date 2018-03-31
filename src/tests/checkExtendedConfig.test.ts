@@ -6,7 +6,7 @@ const { printErrors } = require('../cli/printErrors');
 describe('checkExtendedConfig basics', () => {
   it('use case 1', async () => {
     const files = {
-      '/clown.js': `{
+      '/clown.json': `{
         "extensions": ["/clownExtensionA"]
       }`,
       '/clownExtensionA/package.json': `{
