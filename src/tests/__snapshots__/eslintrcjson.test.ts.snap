@@ -2,53 +2,53 @@
 
 exports[`eslintrc.json use case 1 1`] = `
 "{
-  \\"plugins\\": [
-    \\"graphql\\",
-    \\"plugin-required-for-react-i-guess\\"
+  'plugins': [
+    'graphql',
+    'plugin-required-for-react-i-guess'
   ],
-  \\"rules\\": {
-    \\"graphql/template-strings\\": [
-      \\"error\\",
+  'rules': {
+    'graphql/template-strings': [
+      'error',
       {
-        \\"env\\": \\"literal\\",
-        \\"validators\\": \\"all\\"
+        'env': 'literal',
+        'validators': 'all'
       }
     ],
-    \\"graphql/no-deprecated-fields\\": [
-      \\"error\\",
+    'graphql/no-deprecated-fields': [
+      'error',
       {
-        \\"env\\": \\"literal\\"
+        'env': 'literal'
       }
     ],
-    \\"graphql/capitalized-type-name\\": [
-      \\"error\\",
+    'graphql/capitalized-type-name': [
+      'error',
       {
-        \\"env\\": \\"literal\\"
+        'env': 'literal'
       }
     ],
-    \\"graphql/named-operations\\": [
-      \\"error\\",
+    'graphql/named-operations': [
+      'error',
       {
-        \\"env\\": \\"literal\\"
+        'env': 'literal'
       }
     ],
-    \\"react/jsx-max-depth\\": [
-      \\"error\\",
+    'react/jsx-max-depth': [
+      'error',
       {
-        \\"max\\": 4
+        'max': 4
       }
     ],
-    \\"react/no-access-state-in-setstate\\": \\"error\\",
-    \\"react/no-multi-comp\\": [
-      \\"error\\",
+    'react/no-access-state-in-setstate': 'error',
+    'react/no-multi-comp': [
+      'error',
       {
-        \\"ignoreStateless\\": true
+        'ignoreStateless': true
       }
     ],
-    \\"react/jsx-pascal-case\\": \\"error\\",
-    \\"react/jsx-no-target-blank\\": \\"error\\"
+    'react/jsx-pascal-case': 'error',
+    'react/jsx-no-target-blank': 'error'
   },
-  \\"parser\\": \\"typescript-eslint-parser\\"
+  'parser': 'typescript-eslint-parser'
 }
 "
 `;

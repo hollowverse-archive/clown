@@ -2,8 +2,8 @@
 
 exports[`Basics use case 1 1`] = `
 "{
-    \\"name\\": \\"Stuff\\",
-    \\"foo\\": \\"bar\\"
+        'name': 'Stuff',
+        'foo': 'bar'
 }
 "
 `;
