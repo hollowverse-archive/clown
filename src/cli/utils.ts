@@ -1,11 +1,11 @@
-import { ClownConfig, ExtensionPathAndSourceFiles } from './types';
+import { ClownConfig } from './types';
 import _ from 'lodash';
 import fs from 'fs-extra';
 import realWriteJsonFile from 'write-json-file';
 import path from 'path';
 
 export function getClownConfigPath(cwd: string) {
-  return path.resolve(cwd, 'clown.js');
+  return path.resolve(cwd, 'clown.json');
 }
 
 export function writeJsonFile(filePath: string, json: {}) {
@@ -21,7 +21,7 @@ export function writeFile(filePath: string, fileContent: string) {
 
 export async function readFile(filePath: string) {
   try {
-    return fs.readFile(filePath, 'utf8');
+    return await fs.readFile(filePath, 'utf8');
   } catch (e) {
     return undefined;
   }

@@ -8,7 +8,7 @@ export function printErrors(discrepancies: Discrepancies) {
     console.log(`\n\n${chalk.bold.underline(filePath)}`);
     console.log(
       diff(expected, received, {
-        aAnnotation: `What should be`,
+        aAnnotation: `What it should be`,
         bAnnotation: 'What it is',
       }),
     );
