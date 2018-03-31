@@ -9,7 +9,6 @@ import { vol } from '@forabi/memfs';
 export async function getExtensionPathsAndSourceFiles(cwd: string) {
   /* for Clown to work, the user has to have a file called `clown.js` at the location
   where they are running the script */
-  // console.log('vol', vol.toJSON());
   const clownConfigPath = getClownConfigPath(cwd);
   const clownConfig = (await fs.readJson(clownConfigPath)) as ClownConfig;
 

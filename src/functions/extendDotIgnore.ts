@@ -13,5 +13,5 @@ export function extendDotIgnore(source: string, destination: string) {
   });
   const combinedContent = uniqueCombinedLines.join('\n');
 
-  return _.trimEnd(combinedContent);
+  return _.trim(`${combinedContent.replace(/\n{3,}/g, '\n')}\n`);
 }
