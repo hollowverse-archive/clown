@@ -3,7 +3,7 @@ import { computeFileContents } from './computeFileContents';
 import _ from 'lodash';
 import bluebird from 'bluebird';
 import { patchFs } from 'fs-monkey';
-import { fs } from '@forabi/memfs';
+import { fs, vol } from '@forabi/memfs';
 import { extendConfig } from './extendConfig';
 import { DestinationContent, Discrepancies } from './types';
 import { printErrors } from './printErrors';
@@ -38,7 +38,7 @@ export async function checkExtendedConfig(cwd: string) {
   knows the answer to our question. But `extendConfig` writes files to the actual disk, and we don't
   want that here. So we will patch the Node filesystem with a mock filesystem, which `extendConfig` will
   write to. */
-  patchFs(fs);
+  patchFs(vol, fs);
   await extendConfig(cwd);
 
   /* Now, the expected content should have been written to the mock filesystem. Let's read it and
