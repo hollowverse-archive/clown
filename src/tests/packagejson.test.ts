@@ -1,5 +1,6 @@
 import { extendConfig } from '../cli/extendConfig';
 import { disk } from '../../mockHelpers/Disk';
+import { getJsonContentFromDisk } from '../../mockHelpers/getJsonContentFromDisk';
 
 describe('package.json', () => {
   it('use case 1', async () => {
@@ -51,6 +52,6 @@ describe('package.json', () => {
 
     await extendConfig('/');
 
-    expect(await disk.read('/package.json')).toMatchSnapshot();
+    expect(await getJsonContentFromDisk('/package.json')).toMatchSnapshot();
   });
 });
