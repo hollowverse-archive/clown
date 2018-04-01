@@ -7,17 +7,11 @@ import fs from 'fs-extra';
 
 export async function extendConfig(cwd: string) {
   const fileContents = await computeFileContents(cwd);
-  const iterableFileContents = _.map(
-    fileContents,
-    (fileContent, destinationPath) => ({
-      destinationPath,
-      fileContent,
-    }),
-  );
+  const iterableFileContents = _.entries(fileContents);
 
   await bluebird.each(
     iterableFileContents,
-    async ({ destinationPath, fileContent }) => {
+    async ([destinationPath, fileContent]) => {
       await fs.mkdirp(path.dirname(destinationPath));
 
       return writeFile(destinationPath, fileContent);

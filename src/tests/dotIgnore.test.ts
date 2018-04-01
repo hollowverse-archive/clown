@@ -6,6 +6,7 @@ describe('dot ignore', () => {
     vol.reset();
   });
 
+  // tslint:disable:mocha-no-side-effect-code
   test('merges the lines', async () => {
     const files = {
       '/clown.json': `{

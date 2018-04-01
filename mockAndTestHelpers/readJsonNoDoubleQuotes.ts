@@ -6,5 +6,6 @@ JSON, so the JSON becomes cluttered with \\" \\" \\" \\", making it unreadable. 
 below substitutes double quotes for single quotes when reading JSON content from the mock disk,
 so there wouldn't be double-quote escaping issues. */
 export function readJsonNoDoubleQuotes(filePathInDisk: string) {
+  // tslint:disable-next-line:quotemark
   return (fs.readFileSync(filePathInDisk, 'utf8') as string).replace(/"/g, "'");
 }

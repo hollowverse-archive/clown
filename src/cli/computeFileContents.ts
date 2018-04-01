@@ -18,6 +18,7 @@ import glob from 'globby';
 import fs from 'fs-extra';
 import { jsonStringify } from './jsonStringify';
 
+// tslint:disable-next-line:max-func-body-length
 export async function computeFileContents(cwd: string) {
   /* for Clown to work, the user has to have a file called `clown.json` at the location
   where they are running the script */
@@ -77,14 +78,12 @@ export async function computeFileContents(cwd: string) {
   We want to reduce this structure to a single object where a KEY is the path to the destination file
   and the VALUE is the content of the file as a string.
   */
-  return await bluebird.reduce(
+  return bluebird.reduce(
     extensionPathsAndSourceFiles,
     async (
       fileContents: FileContents,
       [extensionPath, sourceFiles]: ExtensionPathAndSourceFiles,
     ) => {
-      const clownConfigPath = getClownConfigPath(cwd);
-
       await bluebird.each(sourceFiles, async sourceFile => {
         /* We will need to merge each of the source files of this extension path with their targeted
         destination files. That's why we need to loop through the source files. */
@@ -132,6 +131,7 @@ export async function computeFileContents(cwd: string) {
           );
 
           fileContents[destinationFilePath] = extendedContent;
+
           return;
         }
 
@@ -150,12 +150,14 @@ export async function computeFileContents(cwd: string) {
             extendedContent,
             fileContents[destinationFilePath],
           );
+
           return;
         }
 
         /* If the content type of the file is something we don't know how to extend, then we
         just put the content of the source file into the destination as-is */
         fileContents[destinationFilePath] = sourceFileContent;
+
         return;
       });
 

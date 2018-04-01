@@ -22,7 +22,6 @@ exports[`dot ignore merges the lines 1`] = `
 
         # another comment
         .idea
-
 # new stuff
         bin"
 `;
