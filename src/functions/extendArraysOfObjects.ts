@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import _ from 'lodash';
 import { ExtendJson } from './types';
 import { guessKeyWithUniqueValue } from './utils';
 

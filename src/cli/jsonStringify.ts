@@ -8,9 +8,6 @@ function getIndentation(str: string | undefined) {
   return 2;
 }
 
-export function jsonStringify(
-  json: any,
-  destinationContent: string | undefined = undefined,
-) {
+export function jsonStringify(json: any, destinationContent?: string) {
   return `${JSON.stringify(json, null, getIndentation(destinationContent))}\n`;
 }

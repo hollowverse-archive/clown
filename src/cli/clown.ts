@@ -6,13 +6,13 @@ import { checkExtendedConfig } from './checkExtendedConfig';
 
 const cwd = process.cwd();
 
-function handleExtendConfig() {
+async function handleExtendConfig() {
   return extendConfig(cwd);
 }
 
 program.command('run').action(handleExtendConfig);
 
-program.command('check').action(() => {
+program.command('check').action(async () => {
   return checkExtendedConfig(cwd);
 });
 

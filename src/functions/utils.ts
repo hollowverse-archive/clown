@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import _ from 'lodash';
 
 export function isArrayOfObjects(value: any[]) {
   return _.isArray(value) && _.every(value, _.isObject);
@@ -19,13 +19,13 @@ export function isArrayOfStrings(value: any[]) {
 
 export function guessKeyWithUniqueValue(records: any[]) {
   const sampleRecord = records[0];
-  const potentialKeys = _.mapValues(sampleRecord, (_1, key) =>
+  const potentialKeys = _.mapValues(sampleRecord, (_value, key) =>
     keyIsPotentialId(records, key),
   );
 
-  const key = _.findKey(potentialKeys);
+  const firstPotentialKey = _.findKey(potentialKeys);
 
-  if (key === undefined) {
+  if (firstPotentialKey === undefined) {
     throw new Error(
       `Could not guess record ID. Example record: ${JSON.stringify(
         sampleRecord,
@@ -33,7 +33,7 @@ export function guessKeyWithUniqueValue(records: any[]) {
     );
   }
 
-  return key;
+  return firstPotentialKey;
 }
 
 export function isArrayOfUnmergeables(arr: any[]) {

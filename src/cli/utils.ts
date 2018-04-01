@@ -7,7 +7,7 @@ export function getClownConfigPath(cwd: string) {
   return path.resolve(cwd, 'clown.json');
 }
 
-export function writeFile(filePath: string, fileContent: string) {
+export async function writeFile(filePath: string, fileContent: string) {
   return fs.writeFile(filePath, fileContent, 'utf8');
 }
 
