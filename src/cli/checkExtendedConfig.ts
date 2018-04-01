@@ -7,14 +7,10 @@ import { printErrors } from './printErrors';
 
 export async function checkExtendedConfig(cwd: string) {
   const expectedContents = await computeFileContents(cwd);
-
-  const iterableExpectedContents = _.map(
-    expectedContents,
-    (fileContent, destinationPath) => ({ destinationPath, fileContent }),
-  );
+  const iterableExpectedContents = _.entries(expectedContents);
   const currentContent: FileContents = await bluebird.reduce(
     iterableExpectedContents,
-    async (currentContentAccumulator: FileContents, { destinationPath }) => {
+    async (currentContentAccumulator: FileContents, [destinationPath]) => {
       const content = await readFile(destinationPath);
 
       if (content) {
@@ -30,7 +26,7 @@ export async function checkExtendedConfig(cwd: string) {
     iterableExpectedContents,
     async (
       discrepancyAccumulator: Discrepancies,
-      { destinationPath, fileContent: expectedContent },
+      [destinationPath, expectedContent],
     ) => {
       const destinationContent = currentContent[destinationPath];
 
