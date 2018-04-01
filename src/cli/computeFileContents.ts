@@ -8,7 +8,6 @@ import {
 } from './utils';
 import { extendJson } from '../functions/extendJson';
 import { extendDotIgnore } from '../functions/extendDotIgnore';
-import { getExtensionPathsAndSourceFiles } from './getExtensionPathsAndSourceFiles';
 import bluebird from 'bluebird';
 import {
   ClownConfig,
@@ -77,7 +76,7 @@ export async function computeFileContents(cwd: string) {
   We want to reduce this structure to a single object where a KEY is the path to the destination file
   and the VALUE is the content of the file as a string.
   */
-  const fileContents = await bluebird.reduce(
+  return await bluebird.reduce(
     extensionPathsAndSourceFiles,
     async (
       fileContents: FileContents,
@@ -174,10 +173,4 @@ export async function computeFileContents(cwd: string) {
     },
     {},
   );
-
-  /* And from this function we return clownConfig and the fileContents for the clownConfig */
-  return {
-    clownConfig: { path: clownConfigPath, content: clownConfigContent },
-    fileContents,
-  };
 }

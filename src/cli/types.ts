@@ -13,7 +13,7 @@ export type FileContents = {
   [destinationPath: string]: FileContent;
 };
 
-export type DestinationContent = { [filePath: string]: string | undefined };
+export type DestinationContent = { [filePath: string]: string };
 
 export type Discrepancies = {
   [destinationFilePath: string]: {

@@ -6,6 +6,7 @@ import chalk from 'chalk';
 export function printErrors(discrepancies: Discrepancies) {
   _.each(discrepancies, ({ expected, received }, filePath) => {
     console.log(`\n\n${chalk.bold.underline(filePath)}`);
+
     console.log(
       diff(expected, received, {
         aAnnotation: `What it should be`,

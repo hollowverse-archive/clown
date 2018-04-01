@@ -4,13 +4,13 @@ import { computeFileContents } from './computeFileContents';
 import _ from 'lodash';
 import bluebird from 'bluebird';
 import fs from 'fs-extra';
+import mockFs from 'mock-fs';
 
 export async function extendConfig(
   cwd: string,
-  _fileContents: any = undefined,
+  mockContent: { [name: string]: string } | undefined = undefined,
 ) {
-  const { fileContents } =
-    { fileContents: _fileContents } || (await computeFileContents(cwd));
+  const { fileContents } = await computeFileContents(cwd);
   const iterableFileContents = _.map(
     fileContents,
     (fileContent, destinationPath) => ({
@@ -18,6 +18,10 @@ export async function extendConfig(
       fileContent,
     }),
   );
+
+  if (mockContent) {
+    mockFs(mockContent);
+  }
 
   return await bluebird.each(
     iterableFileContents,
