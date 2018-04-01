@@ -30,6 +30,7 @@ describe('checkExtendedConfig basics', () => {
 
     await checkExtendedConfig('/');
 
+    // @ts-ignore
     expect(printErrors.mock.calls).toMatchSnapshot();
   });
 });
