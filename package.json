@@ -16,7 +16,7 @@
     "access": "public"
   },
   "bin": {
-    "clown": "./bin/src/cli/clown.js"
+    "clown": "./bin/src/clown.js"
   },
   "eslintIgnore": [
     "bin/**/*"

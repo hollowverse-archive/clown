@@ -1,4 +1,4 @@
-import { extendConfig } from '../cli/extendConfig';
+import { extendConfig } from '../extendConfig';
 import { readJsonNoDoubleQuotes } from '../../mockAndTestHelpers/readJsonNoDoubleQuotes';
 import { vol } from '@forabi/memfs';
 

@@ -1,6 +1,6 @@
-import { checkExtendedConfig } from '../cli/checkExtendedConfig';
+import { checkExtendedConfig } from '../checkExtendedConfig';
 import { vol } from '@forabi/memfs';
-import { printErrors } from '../cli/printErrors';
+import { printErrors } from '../printErrors';
 
 describe('checkExtendedConfig basics', () => {
   beforeEach(() => {

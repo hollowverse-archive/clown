@@ -6,8 +6,8 @@ import {
   getClownConfigPath,
   verifyClownConfigLooksGood,
 } from './utils';
-import { extendJson } from '../functions/extendJson';
-import { extendDotIgnore } from '../functions/extendDotIgnore';
+import { extendJson } from './extendJson';
+import { extendDotIgnore } from './extendDotIgnore';
 import bluebird from 'bluebird';
 import {
   ClownConfig,

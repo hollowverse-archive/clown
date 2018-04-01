@@ -1,4 +1,4 @@
-import { extendConfig } from '../cli/extendConfig';
+import { extendConfig } from '../extendConfig';
 import { vol, fs } from '@forabi/memfs';
 
 describe('dot ignore', () => {
