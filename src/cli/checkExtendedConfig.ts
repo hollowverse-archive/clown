@@ -6,17 +6,14 @@ import { FileContents, Discrepancies } from './types';
 import { printErrors } from './printErrors';
 
 export async function checkExtendedConfig(cwd: string) {
-  /* We need to check if the content that currently exists on disk is the same as the content
-  that Clown thinks should be on disk.
+  const expectedContents = await computeFileContents(cwd);
 
-  The first step is to get the content that's currently on disk */
-  const fileContents = await computeFileContents(cwd);
-  const iterableFileContents = _.map(
-    fileContents,
+  const iterableExpectedContents = _.map(
+    expectedContents,
     (fileContent, destinationPath) => ({ destinationPath, fileContent }),
   );
   const currentContent: FileContents = await bluebird.reduce(
-    iterableFileContents,
+    iterableExpectedContents,
     async (currentContentAccumulator: FileContents, { destinationPath }) => {
       const content = await readFile(destinationPath);
 
@@ -30,7 +27,7 @@ export async function checkExtendedConfig(cwd: string) {
   );
 
   const discrepancies: Discrepancies = await bluebird.reduce(
-    iterableFileContents,
+    iterableExpectedContents,
     async (
       discrepancyAccumulator: Discrepancies,
       { destinationPath, fileContent: expectedContent },

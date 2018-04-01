@@ -19,7 +19,7 @@ import fs from 'fs-extra';
 import { jsonStringify } from './jsonStringify';
 
 export async function computeFileContents(cwd: string) {
-  /* for Clown to work, the user has to have a file called `clown.js` at the location
+  /* for Clown to work, the user has to have a file called `clown.json` at the location
   where they are running the script */
   const clownConfigPath = getClownConfigPath(cwd);
   const clownConfigContent = (await fs.readJson(
