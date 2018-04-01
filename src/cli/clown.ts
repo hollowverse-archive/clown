@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import program from 'commander';
 
-import { extendConfig } from './extendConfig';
+// import { extendConfig } from './extendConfig';
 import { checkExtendedConfig } from './checkExtendedConfig';
 
 const cwd = process.cwd();

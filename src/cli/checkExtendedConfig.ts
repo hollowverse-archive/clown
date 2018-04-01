@@ -3,17 +3,21 @@ import { computeFileContents } from './computeFileContents';
 import _ from 'lodash';
 import bluebird from 'bluebird';
 import { patchFs } from 'fs-monkey';
-import { fs, vol } from '@forabi/memfs';
+import { vol } from '@forabi/memfs';
 import { extendConfig } from './extendConfig';
 import { DestinationContent, Discrepancies } from './types';
 import { printErrors } from './printErrors';
+import fs from 'fs';
 
 export async function checkExtendedConfig(cwd: string) {
   /* We need to check if the content that currently exists on disk is the same as the content
   that Clown thinks should be on disk.
 
   The first step is to get the content that's currently on disk */
-  const fileContents = await computeFileContents(cwd);
+  const {
+    fileContents,
+    clownConfig: { path: clownConfigPath, content: clownConfigContent },
+  } = await computeFileContents(cwd);
   const iterableFileContents = _.map(
     fileContents,
     (fileContent, destinationPath) => ({ destinationPath, fileContent }),
@@ -38,8 +42,13 @@ export async function checkExtendedConfig(cwd: string) {
   knows the answer to our question. But `extendConfig` writes files to the actual disk, and we don't
   want that here. So we will patch the Node filesystem with a mock filesystem, which `extendConfig` will
   write to. */
-  patchFs(vol, fs);
-  await extendConfig(cwd);
+  const mockDiskContent = {
+    [clownConfigPath]: JSON.stringify(clownConfigContent),
+    ..._.mapValues(fileContents, fileContent => fileContent.content),
+  };
+  vol.fromJSON(mockDiskContent);
+  (patchFs as any)(vol, fs);
+  await extendConfig(cwd, fileContents);
 
   /* Now, the expected content should have been written to the mock filesystem. Let's read it and
   compare it with the current content that we have retrieved earlier. */

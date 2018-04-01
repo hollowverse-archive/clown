@@ -5,8 +5,12 @@ import _ from 'lodash';
 import bluebird from 'bluebird';
 import fs from 'fs-extra';
 
-export async function extendConfig(cwd: string) {
-  const fileContents = await computeFileContents(cwd);
+export async function extendConfig(
+  cwd: string,
+  _fileContents: any = undefined,
+) {
+  const { fileContents } =
+    { fileContents: _fileContents } || (await computeFileContents(cwd));
   const iterableFileContents = _.map(
     fileContents,
     (fileContent, destinationPath) => ({
