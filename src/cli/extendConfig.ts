@@ -10,7 +10,7 @@ export async function extendConfig(
   cwd: string,
   mockContent: { [name: string]: string } | undefined = undefined,
 ) {
-  const { fileContents } = await computeFileContents(cwd);
+  const fileContents = await computeFileContents(cwd);
   const iterableFileContents = _.map(
     fileContents,
     (fileContent, destinationPath) => ({
@@ -23,7 +23,7 @@ export async function extendConfig(
     mockFs(mockContent);
   }
 
-  return await bluebird.each(
+  await bluebird.each(
     iterableFileContents,
     async ({ destinationPath, fileContent: { content, type } }) => {
       await fs.mkdirp(path.dirname(destinationPath));
@@ -35,4 +35,6 @@ export async function extendConfig(
       return writeFile(destinationPath, content);
     },
   );
+
+  mockFs.restore();
 }

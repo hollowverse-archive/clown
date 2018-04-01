@@ -11,17 +11,13 @@ describe('dot ignore', () => {
       '/clown.json': `{
         "extensions": ["/clownExtensionA"]
       }`,
-      '/clownExtensionA/.gitignore': `
-        # new stuff
-        bin
-      `,
-      '/.gitignore': `
-        # comment
+      '/clownExtensionA/.gitignore': `# new stuff
+        bin`,
+      '/.gitignore': `# comment
         node_modules
 
         # another comment
-        .idea
-      `,
+        .idea`,
     };
 
     vol.fromJSON(files);
@@ -36,20 +32,16 @@ describe('dot ignore', () => {
       '/clown.json': `{
         "extensions": ["/clownExtensionA"]
       }`,
-      '/clownExtensionA/.gitignore': `
-        # comment
+      '/clownExtensionA/.gitignore': `# comment
         node_modules
 
         # another comment
-        .idea
-      `,
-      '/.gitignore': `
-        # comment
+        .idea`,
+      '/.gitignore': `# comment
         node_modules
 
         # another comment
-        .idea
-      `,
+        .idea`,
     };
 
     vol.fromJSON(files);
@@ -64,8 +56,7 @@ describe('dot ignore', () => {
       '/clown.json': `{
         "extensions": ["/clownExtensionA"]
       }`,
-      '/clownExtensionA/.gitignore': `
-        # comment
+      '/clownExtensionA/.gitignore': `# comment
         node_modules
 
         # another comment

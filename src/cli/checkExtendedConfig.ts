@@ -11,7 +11,7 @@ export async function checkExtendedConfig(cwd: string) {
   that Clown thinks should be on disk.
 
   The first step is to get the content that's currently on disk */
-  const { fileContents } = await computeFileContents(cwd);
+  const fileContents = await computeFileContents(cwd);
   const iterableFileContents = _.map(
     fileContents,
     (fileContent, destinationPath) => ({ destinationPath, fileContent }),
