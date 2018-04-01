@@ -2,8 +2,7 @@ import { readFile } from './utils';
 import { computeFileContents } from './computeFileContents';
 import _ from 'lodash';
 import bluebird from 'bluebird';
-import { extendConfig } from './extendConfig';
-import { DestinationContent, Discrepancies } from './types';
+import { FileContents, Discrepancies } from './types';
 import { printErrors } from './printErrors';
 
 export async function checkExtendedConfig(cwd: string) {
@@ -16,12 +15,9 @@ export async function checkExtendedConfig(cwd: string) {
     fileContents,
     (fileContent, destinationPath) => ({ destinationPath, fileContent }),
   );
-  const currentContent: DestinationContent = await bluebird.reduce(
+  const currentContent: FileContents = await bluebird.reduce(
     iterableFileContents,
-    async (
-      currentContentAccumulator: DestinationContent,
-      { destinationPath },
-    ) => {
+    async (currentContentAccumulator: FileContents, { destinationPath }) => {
       const content = await readFile(destinationPath);
 
       if (content) {
@@ -33,21 +29,12 @@ export async function checkExtendedConfig(cwd: string) {
     {},
   );
 
-  /* Now that we have the content that's currently on disk, we need to find out what Clown thinks
-  should be on disk instead. To do that, we'll use `extendConfig` since that's the function that
-  knows the answer to our question.
-
-  But `extendConfig` will again writes files to the actual disk, and we don't
-  want that here. So we will patch the Node filesystem with a mock filesystem, which `extendConfig` will
-  write to. */
-  await extendConfig(cwd, currentContent);
-
-  /* Now, the expected content should have been written to the mock filesystem. Let's read it and
-  compare it with the current content that we have retrieved earlier. */
   const discrepancies: Discrepancies = await bluebird.reduce(
     iterableFileContents,
-    async (discrepancyAccumulator: Discrepancies, { destinationPath }) => {
-      const expectedContent = (await readFile(destinationPath)) as string;
+    async (
+      discrepancyAccumulator: Discrepancies,
+      { destinationPath, fileContent: expectedContent },
+    ) => {
       const destinationContent = currentContent[destinationPath];
 
       if (

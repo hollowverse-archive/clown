@@ -12,5 +12,5 @@ export function jsonStringify(
   json: any,
   destinationContent: string | undefined = undefined,
 ) {
-  return JSON.stringify(json, null, getIndentation(destinationContent));
+  return `${JSON.stringify(json, null, getIndentation(destinationContent))}\n`;
 }

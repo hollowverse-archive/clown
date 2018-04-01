@@ -1,18 +1,10 @@
 import { ClownConfig } from './types';
 import _ from 'lodash';
 import fs from 'fs-extra';
-import realWriteJsonFile from 'write-json-file';
 import path from 'path';
 
 export function getClownConfigPath(cwd: string) {
   return path.resolve(cwd, 'clown.json');
-}
-
-export function writeJsonFile(filePath: string, json: {}) {
-  return realWriteJsonFile(filePath, json, {
-    indent: ' ',
-    detectIndent: true,
-  });
 }
 
 export function writeFile(filePath: string, fileContent: string) {

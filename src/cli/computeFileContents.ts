@@ -16,6 +16,7 @@ import {
 } from './types';
 import glob from 'globby';
 import fs from 'fs-extra';
+import { jsonStringify } from './jsonStringify';
 
 export async function computeFileContents(cwd: string) {
   /* for Clown to work, the user has to have a file called `clown.js` at the location
@@ -116,10 +117,7 @@ export async function computeFileContents(cwd: string) {
         if (fileContents[destinationFilePath] === undefined) {
           const destinationFileContent = await readFile(destinationFilePath);
 
-          fileContents[destinationFilePath] = {
-            content: destinationFileContent || '',
-            type: 'unknown',
-          };
+          fileContents[destinationFilePath] = destinationFileContent || '';
         }
         /* Now we have the initial content for that destination file. Let's see if we can merge
         more stuff into it. */
@@ -129,41 +127,35 @@ export async function computeFileContents(cwd: string) {
         with it. */
         if (isDotIgnoreFile(path.basename(destinationFilePath))) {
           const extendedContent = extendDotIgnore(
-            fileContents[destinationFilePath].content,
+            fileContents[destinationFilePath],
             sourceFileContent,
           );
 
-          fileContents[destinationFilePath] = {
-            content: extendedContent,
-            type: 'dotIgnore',
-          };
+          fileContents[destinationFilePath] = extendedContent;
           return;
         }
 
         /* If the destination file initial content is JSON or the source file content is JSON,
         we treat this file as a JSON and extend it as such. */
         if (
-          isMergeableJsonContent(fileContents[destinationFilePath].content) ||
+          isMergeableJsonContent(fileContents[destinationFilePath]) ||
           isMergeableJsonContent(sourceFileContent)
         ) {
           const extendedContent = extendJson(
-            JSON.parse(fileContents[destinationFilePath].content || '{}'),
+            JSON.parse(fileContents[destinationFilePath] || '{}'),
             JSON.parse(sourceFileContent),
           );
 
-          fileContents[destinationFilePath] = {
-            content: JSON.stringify(extendedContent),
-            type: 'json',
-          };
+          fileContents[destinationFilePath] = jsonStringify(
+            extendedContent,
+            fileContents[destinationFilePath],
+          );
           return;
         }
 
         /* If the content type of the file is something we don't know how to extend, then we
         just put the content of the source file into the destination as-is */
-        fileContents[destinationFilePath] = {
-          content: sourceFileContent,
-          type: 'unknown',
-        };
+        fileContents[destinationFilePath] = sourceFileContent;
         return;
       });
 
