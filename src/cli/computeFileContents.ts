@@ -42,17 +42,7 @@ export async function computeFileContents(cwd: string) {
   verifyClownConfigLooksGood(clownConfigContent);
 
   /* So, let's map the list of extension paths so that for each path, we also have a list of the files
-  paths relative to the extension path:
-
-  [
-    [
-      "some/path/node_modules/@hollowverse/config/eslint", [".eslintrc.json", "package.json"],
-    ],
-    [
-      "etc...": ["etc...", "etc..."]
-    ]
-  ]
-  */
+  paths relative to the extension path */
   const extensionPathsAndSourceFiles = await bluebird.map(
     clownConfigContent.extensions,
     async (extensionPath: string) => {
@@ -75,8 +65,8 @@ export async function computeFileContents(cwd: string) {
     ]
   ]
 
-  We want to reduce this structure to a single object where a KEY is the path to the destination file
-  and the VALUE is the content of the file as a string.
+  We want to reduce this structure to a single object, called `fileContents` where a KEY is the
+  path to the destination file and the VALUE is the content of the file as a string.
   */
   return bluebird.reduce(
     extensionPathsAndSourceFiles,
