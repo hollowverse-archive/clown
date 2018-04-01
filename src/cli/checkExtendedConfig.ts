@@ -35,7 +35,9 @@ export async function checkExtendedConfig(cwd: string) {
 
   /* Now that we have the content that's currently on disk, we need to find out what Clown thinks
   should be on disk instead. To do that, we'll use `extendConfig` since that's the function that
-  knows the answer to our question. But `extendConfig` writes files to the actual disk, and we don't
+  knows the answer to our question.
+
+  But `extendConfig` will again writes files to the actual disk, and we don't
   want that here. So we will patch the Node filesystem with a mock filesystem, which `extendConfig` will
   write to. */
   await extendConfig(cwd, currentContent);
