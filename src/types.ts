@@ -14,3 +14,5 @@ export type Discrepancies = {
     received: string | undefined;
   };
 };
+
+export type ExtendJson = (destination: any, source: any) => any;
