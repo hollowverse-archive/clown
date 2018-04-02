@@ -1,6 +1,6 @@
 {
   "name": "@hollowverse/clown",
-  "version": "",
+  "version": "0.0.0-Set-by-CI-when-publishing",
   "description": "CLI for scaffolding projects and juggling common configurations",
   "repository": "git@github.com:hollowverse/clown.git",
   "author": "Hollowverse",
