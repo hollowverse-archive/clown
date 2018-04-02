@@ -1,6 +1,6 @@
 {
   "name": "@hollowverse/clown",
-  "version": "1.0.0",
+  "version": "0.0.0-Set-by-CI-when-publishing",
   "description": "CLI for scaffolding projects and juggling common configurations",
   "repository": "git@github.com:hollowverse/clown.git",
   "author": "Hollowverse",
@@ -8,9 +8,10 @@
   "scripts": {
     "test": "jest",
     "lint": "tslint './*.ts' 'src/**/*.ts' --project tsconfig.json",
-    "build": "tsc && babel bin -d bin",
+    "build": "tsc && babel bin -d bin && set-version",
     "dev": "tsc --watch",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "set-version": "set-version"
   },
   "publishConfig": {
     "access": "public"
@@ -69,6 +70,7 @@
     "@babel/plugin-transform-runtime": "^7.0.0-beta.42",
     "@babel/preset-env": "^7.0.0-beta.42",
     "@hollowverse/config": "^4.0.0",
+    "@hollowverse/utils": "^4.1.2",
     "@types/bluebird": "^3.5.20",
     "@types/chalk": "^2.2.0",
     "@types/commander": "^2.11.0",
