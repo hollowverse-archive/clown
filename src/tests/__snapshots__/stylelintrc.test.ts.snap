@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`.stylelintrc use case 1 1`] = `
+"{
+  'plugins': [
+    'stylelint-no-unsupported-browser-features'
+  ],
+  'rules': {
+    'plugin/no-unsupported-browser-features': [
+      true,
+      {
+        'ignore': [
+          'css-featurequeries',
+          'outline',
+          'css-appearance',
+          'viewport-units'
+        ]
+      }
+    ],
+    'at-rule-no-vendor-prefix': [
+      true
+    ],
+    'media-feature-name-no-vendor-prefix': [
+      true
+    ],
+    'selector-no-vendor-prefix': [
+      true
+    ],
+    'property-no-vendor-prefix': [
+      true
+    ],
+    'value-no-vendor-prefix': [
+      true
+    ],
+    'property-blacklist': [
+      'margin-bottom',
+      'margin-right',
+      'margin'
+    ]
+  },
+  'ignoreFiles': [
+    './coverage/**/*'
+  ]
+}
+"
+`;

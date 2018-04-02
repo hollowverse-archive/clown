@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Extending non-existing file creates a file if it does not exist 1`] = `
+"{
+  'name': 'Stuff',
+  'foo': 'bar'
+}
+"
+`;

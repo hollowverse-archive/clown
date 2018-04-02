@@ -1,0 +1,11 @@
+{
+  "extends": "./node_modules/@hollowverse/config/tsconfig.json",
+  "compilerOptions": {
+    "maxNodeModuleJsDepth": 0,
+    "outDir": "./bin",
+    "module": "commonjs",
+    "sourceMap": true,
+    "noEmitOnError": false
+  },
+  "include": ["src"]
+}

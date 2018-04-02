@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`dot ignore it does not add unnecessary empty lines to the bottom 1`] = `
+"# comment
+        node_modules
+
+        # another comment
+        .idea"
+`;
+
+exports[`dot ignore it does not add unnecessary empty lines to the top 1`] = `
+"# comment
+        node_modules
+
+        # another comment
+        .ideaz"
+`;
+
+exports[`dot ignore merges the lines 1`] = `
+"# comment
+        node_modules
+
+        # another comment
+        .idea
+# new stuff
+        bin"
+`;

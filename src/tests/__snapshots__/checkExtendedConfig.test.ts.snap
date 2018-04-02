@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`checkExtendedConfig basics use case 1 1`] = `
+Array [
+  Array [
+    Object {
+      "/eslintrc.json": Object {
+        "expected": "{
+        \\"extends\\": \\"someFoo\\",
+        \\"rules\\": \\"ok\\"
+}
+",
+        "received": "{
+        \\"extends\\": \\"someFoo\\"
+      }",
+      },
+      "/package.json": Object {
+        "expected": "{
+        \\"name\\": \\"Stuff\\",
+        \\"foo\\": \\"bar\\"
+}
+",
+        "received": "{
+        \\"name\\": \\"Stuff\\"
+      }",
+      },
+    },
+  ],
+]
+`;

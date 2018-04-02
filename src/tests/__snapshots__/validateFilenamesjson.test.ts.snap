@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`validateFilenames.json use case 1 1`] = `
+"{
+  'rules': [
+    {
+      'validation': 'camelCase',
+      'patterns': [
+        '*/**'
+      ]
+    },
+    {
+      'validation': 'PascalCase',
+      'patterns': [
+        'src/app/components/**',
+        'src/app/pages/**',
+        'src/app/hocs/**'
+      ]
+    },
+    {
+      'validation': 'ignore',
+      'patterns': [
+        'Dockerfile*',
+        'docker-compose.yml',
+        '**/LICENSE.md',
+        '**/README.md',
+        '*/**/typings/*',
+        'src/app/pages/NotablePerson/warningIcon.tsx',
+        'src/app/__tests__/**/*',
+        '__tests__/**/*',
+        '_*.scss',
+        'src/app/assets/algolia/*'
+      ]
+    }
+  ]
+}
+"
+`;
