@@ -1,4 +1,4 @@
-# `@hollowverse/clown`
+# `@hollowverse/clown` [![Build Status](https://travis-ci.org/hollowverse/clown.svg?branch=master)](https://travis-ci.org/hollowverse/clown)
 
 Clown is a CLI that:
 
