@@ -140,7 +140,7 @@ with the content from the extension file.
 ### Ensuring up-to-date configurations
 
 We might want to make sure that our project configurations don't diverge from our scaffolded and shared configurations. For this
-purpose Clown CLI provides
+purpose the Clown CLI provides
 
 ```bash
 yarn clown check
@@ -150,3 +150,22 @@ yarn clown check
 
 When we run this command, Clown will figure out what our configuration files would look like if they were to be extended by Clown
 itself. After it figures this out, it will compare the result with what actually exists. If it sees that the two results are different, it will print an error message telling us which files are different and how they are different.
+
+### Overriding configurations
+
+_Extension folders that appear later in the `extensions` array, overwrite the values of previous extension folders._
+
+That means we can override configurations by creating any local folder and specifying it in our `clown.json` `extensions` array, like
+so:
+
+```js
+{
+  "extensions": [
+    "./node_modules/our-config-module/common",
+    "./node_modules/our-config-module/eslint",
+    "./config-overrides"
+  ]
+}
+```
+
+We can put in `./config-overrides` any files or fragments that we wish to override the previous configurations with.
