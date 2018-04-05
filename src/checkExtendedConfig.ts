@@ -4,6 +4,7 @@ import _ from 'lodash';
 import bluebird from 'bluebird';
 import { FileContents, Discrepancies } from './types';
 import { printErrors } from './printErrors';
+import { isJsonEqual } from './isJsonEqual';
 
 export async function checkExtendedConfig(cwd: string) {
   const expectedContents = await computeFileContents(cwd);
@@ -31,8 +32,9 @@ export async function checkExtendedConfig(cwd: string) {
       const destinationContent = currentContent[destinationPath];
 
       if (
-        destinationContent === undefined ||
-        destinationContent !== expectedContent
+        (destinationContent === undefined ||
+          destinationContent !== expectedContent) &&
+        !isJsonEqual(destinationContent, expectedContent)
       ) {
         discrepancyAccumulator[destinationPath] = {
           expected: expectedContent,

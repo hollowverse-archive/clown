@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`checkExtendedConfig basics does not complain when JSONs are equal but formatted differently 1`] = `Array []`;
+
 exports[`checkExtendedConfig basics use case 1 1`] = `
 Array [
   Array [
