@@ -8,7 +8,7 @@
   "scripts": {
     "test": "jest",
     "lint": "tslint './*.ts' 'src/**/*.ts' --project tsconfig.json",
-    "build": "tsc && babel bin -d bin && set-version",
+    "build": "tsc && babel bin -d bin",
     "dev": "tsc --watch",
     "lint-staged": "lint-staged",
     "set-version": "set-version"

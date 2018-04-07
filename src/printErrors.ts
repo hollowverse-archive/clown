@@ -9,9 +9,11 @@ export function printErrors(discrepancies: Discrepancies) {
     console.log(`\n\n${chalk.bold.underline(filePath)}`);
 
     console.log(
-      diff(expected, received, {
-        aAnnotation: 'What it should be',
-        bAnnotation: 'What it is',
+      diff(expected, received || '\n', {
+        aAnnotation: received
+          ? 'What it should be'
+          : 'Expected to exist with content',
+        bAnnotation: received ? 'What it is' : 'It does not exist',
       }),
     );
   });
