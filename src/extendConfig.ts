@@ -4,6 +4,7 @@ import { computeFileContents } from './computeFileContents';
 import _ from 'lodash';
 import bluebird from 'bluebird';
 import fs from 'fs-extra';
+import { isJsonEqual } from './isJsonEqual';
 
 export async function extendConfig(cwd: string) {
   const fileContents = await computeFileContents(cwd);
@@ -12,9 +13,17 @@ export async function extendConfig(cwd: string) {
   await bluebird.each(
     iterableFileContents,
     async ([destinationPath, fileContent]) => {
+      if (
+        fileContent.destinationContent &&
+        fileContent.type === 'json' &&
+        isJsonEqual(fileContent.destinationContent, fileContent.computedContent)
+      ) {
+        return;
+      }
+
       await fs.mkdirp(path.dirname(destinationPath));
 
-      return writeFile(destinationPath, fileContent);
+      return writeFile(destinationPath, fileContent.computedContent);
     },
   );
 }
