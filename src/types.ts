@@ -4,8 +4,14 @@ export type ClownConfig = {
 
 export type ExtensionPathAndSourceFiles = [string, string[]];
 
+export type FileContent = {
+  destinationContent: string | undefined;
+  computedContent: string;
+  type: 'json' | 'dot-ignore' | 'unknown';
+};
+
 export type FileContents = {
-  [filePath: string]: string;
+  [filePath: string]: FileContent;
 };
 
 export type Discrepancies = {

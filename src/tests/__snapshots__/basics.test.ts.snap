@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Basics does not rewrite a JSON file content if the JSON values are equal 1`] = `
+"{
+        'extends': ['./base/.eslintrc.json']
+      }"
+`;
+
 exports[`Basics use case 1 1`] = `
 "{
         'name': 'Stuff',
