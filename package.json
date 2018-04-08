@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@hollowverse/clown": "^0.0.4",
-    "@hollowverse/config": "^4.0.0",
+    "@hollowverse/config": "^7.2.0",
     "@hollowverse/utils": "^5.0.2",
     "@types/bluebird": "^3.5.20",
     "@types/chalk": "^2.2.0",
