@@ -495,9 +495,16 @@
     invariant "^2.2.2"
     semver "^5.3.0"
 
-"@babel/runtime@^7.0.0-beta.40", "@babel/runtime@^7.0.0-beta.42":
+"@babel/runtime@^7.0.0-beta.42":
   version "7.0.0-beta.42"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0-beta.42.tgz#352e40c92e0460d3e82f49bd7e79f6cda76f919f"
+  dependencies:
+    core-js "^2.5.3"
+    regenerator-runtime "^0.11.1"
+
+"@babel/runtime@^7.0.0-beta.44":
+  version "7.0.0-beta.44"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0-beta.44.tgz#ea5ad6c6fe9a2c1187b025bf42424d28050ee696"
   dependencies:
     core-js "^2.5.3"
     regenerator-runtime "^0.11.1"
@@ -541,16 +548,44 @@
     fast-extend "0.0.2"
     fs-monkey "^0.3.0"
 
+"@hollowverse/clown@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@hollowverse/clown/-/clown-0.0.4.tgz#e4876b51a24d042cd1779e3bc94ba131430d6d81"
+  dependencies:
+    "@babel/polyfill" "^7.0.0-beta.42"
+    "@babel/runtime" "^7.0.0-beta.42"
+    "@forabi/memfs" "^2.7.2"
+    "@types/mock-fs" "^3.6.30"
+    bluebird "^3.5.1"
+    chalk "^2.3.2"
+    commander "^2.12.1"
+    common-tags "^1.7.2"
+    detect-indent "^5.0.0"
+    fs-extra "^5.0.0"
+    fs-monkey "^0.3.1"
+    glob "^7.1.2"
+    globby "^8.0.1"
+    ignore "^3.3.7"
+    jest-diff "^22.4.3"
+    lodash "^4.17.4"
+    minimatch "^3.0.4"
+    mkdirp "^0.5.1"
+    mock-fs "^4.4.2"
+    shelljs "^0.7.8"
+    sort-keys "^2.0.0"
+
 "@hollowverse/config@^4.0.0":
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/@hollowverse/config/-/config-4.0.0.tgz#3a417539bb0ebecbba31a9a830e6768204a7de98"
 
-"@hollowverse/utils@^4.1.2":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@hollowverse/utils/-/utils-4.1.2.tgz#9a176edb331783b8568e227087afbfbe9a612d12"
+"@hollowverse/utils@^5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@hollowverse/utils/-/utils-5.0.2.tgz#bfce9b165741f99b5d9b66d5f34477a66350422d"
   dependencies:
-    "@babel/runtime" "^7.0.0-beta.40"
+    "@babel/runtime" "^7.0.0-beta.44"
+    "@types/aws-lambda" "^0.0.34"
     bluebird "^3.5.1"
+    common-tags "^1.7.2"
     glob "^7.1.2"
     jszip "^3.1.4"
     lodash "^4.17.4"
@@ -563,6 +598,10 @@
   dependencies:
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
+
+"@types/aws-lambda@^0.0.34":
+  version "0.0.34"
+  resolved "https://registry.yarnpkg.com/@types/aws-lambda/-/aws-lambda-0.0.34.tgz#dd6abb59a52dd2b674e9dd8e37de3485ea9cba7d"
 
 "@types/bluebird@^3.5.20":
   version "3.5.20"
