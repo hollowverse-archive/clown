@@ -799,9 +799,9 @@
     shelljs "^0.7.8"
     sort-keys "^2.0.0"
 
-"@hollowverse/config@^8.0.0":
-  version "8.0.0"
-  resolved "https://registry.yarnpkg.com/@hollowverse/config/-/config-8.0.0.tgz#9e5fb01c9c207109fdfa86e3729c0d3a881644b2"
+"@hollowverse/config@^9.0.0":
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/@hollowverse/config/-/config-9.0.0.tgz#4c12b8099e2a807164c64a79c21d6fdd55ee03dd"
   dependencies:
     "@babel/core" "7.0.0-beta.44"
     "@babel/plugin-proposal-object-rest-spread" "^7.0.0-beta.44"
@@ -3485,7 +3485,7 @@ https-proxy-agent@^2.2.0:
     agent-base "^4.1.0"
     debug "^3.1.0"
 
-husky@0.15.0-rc.13:
+husky@^0.15.0-rc.13:
   version "0.15.0-rc.13"
   resolved "https://registry.yarnpkg.com/husky/-/husky-0.15.0-rc.13.tgz#a27550b7b51d2f472e284b48fc9257a6d6b3f681"
   dependencies:
