@@ -10,6 +10,6 @@ bluebird
     await clownExtend();
   })
   .catch(error => {
-    console.error('Error while running `checkExtendedConfig`:', error.message);
+    console.error('Error while running `clownExtend`:', error.message);
     process.exit(1);
   });
