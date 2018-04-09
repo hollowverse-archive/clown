@@ -500,7 +500,7 @@
     "@babel/helper-regex" "7.0.0-beta.44"
     regexpu-core "^4.1.3"
 
-"@babel/polyfill@7.0.0-beta.44":
+"@babel/polyfill@7.0.0-beta.44", "@babel/polyfill@^7.0.0-beta.44":
   version "7.0.0-beta.44"
   resolved "https://registry.yarnpkg.com/@babel/polyfill/-/polyfill-7.0.0-beta.44.tgz#6bbcddebd8f28f1040b9a78fdac7dc515356e5dc"
   dependencies:
@@ -799,9 +799,9 @@
     shelljs "^0.7.8"
     sort-keys "^2.0.0"
 
-"@hollowverse/config@^7.2.0":
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/@hollowverse/config/-/config-7.2.0.tgz#ccadd65556bd5a512aec3bf123c6d86bbdbd9e13"
+"@hollowverse/config@^8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@hollowverse/config/-/config-8.0.0.tgz#9e5fb01c9c207109fdfa86e3729c0d3a881644b2"
   dependencies:
     "@babel/core" "7.0.0-beta.44"
     "@babel/plugin-proposal-object-rest-spread" "^7.0.0-beta.44"
