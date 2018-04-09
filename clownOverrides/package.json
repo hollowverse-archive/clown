@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "pretest": "run-p -l -c --aggregate-output common-check check-ts tslint",
+    "test": "yarn jest",
+    "build": "tsc && babel bin -d bin",
+    "pre-push": "yarn test",
+    "pre-commit": "yarn pretest"
+  }
+}
