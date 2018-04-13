@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`package.json key sorting sorts dependencies and devDependencies 1`] = `
+"{
+  'dependencies': {
+    'a': '1',
+    'b': '1',
+    'c': '1',
+    'z': '1'
+  },
+  'devDependencies': {
+    'e': '1',
+    'f': '1',
+    'h': '1',
+    'm': '1'
+  }
+}
+"
+`;

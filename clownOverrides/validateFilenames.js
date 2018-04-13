@@ -6,7 +6,7 @@ module.exports = {
     },
     {
       validation: 'PascalCase',
-      patterns: [],
+      patterns: ['**/src/ClownFilesystem.ts'],
     },
     {
       validation: 'ignore',

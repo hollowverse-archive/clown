@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`clownCallback.js can edit a json 1`] = `
+"{
+  'name': 'Stuff',
+  'bar': 'b'
+}
+"
+`;

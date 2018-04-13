@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "runtimeVersion": "9.3.0",
+      "name": "Jest Tests",
+      "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+      "args": ["--watch"],
+      "outFiles": ["${workspaceRoot}/bin/**/*"],
+      "console": "externalTerminal"
+    }
+  ]
+}
