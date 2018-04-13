@@ -18,6 +18,7 @@ import glob from 'globby';
 import fs from 'fs-extra';
 import { jsonStringify } from './jsonStringify';
 import { ClownFilesystem } from './ClownFilesystem';
+import { ensureHasFinalNewLine } from './ensureHasFinalNewLine';
 
 // tslint:disable-next-line:max-func-body-length
 export async function computeFileContents(cwd: string) {
@@ -182,6 +183,8 @@ export async function computeFileContents(cwd: string) {
 
         clownCallbackPath = null;
       }
+
+      fileContents = ensureHasFinalNewLine(fileContents);
 
       /* When the `each` loop above finishes, that means we have computed all of our file contents.
       Let's return them. */

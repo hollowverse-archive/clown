@@ -9,5 +9,5 @@ function getIndentation(str: string | undefined) {
 }
 
 export function jsonStringify(json: any, destinationContent?: string) {
-  return `${JSON.stringify(json, null, getIndentation(destinationContent))}\n`;
+  return `${JSON.stringify(json, null, getIndentation(destinationContent))}`;
 }
