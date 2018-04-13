@@ -1,6 +1,6 @@
 # `@hollowverse/clown` [![Build Status](https://travis-ci.org/hollowverse/clown.svg?branch=master)](https://travis-ci.org/hollowverse/clown)
 
-Clown is a CLI that:
+clown is a CLI that:
 
 * Helps with scaffolding a project
 * Extending project configurations
@@ -33,7 +33,7 @@ Next add it to `package.json` scripts.
 }
 ```
 
-Now, say the the root of our project, where we just installed Clown, looks like this:
+Now, say the the root of our project, where we just installed clown, looks like this:
 
 ```bash
 |-- src/
@@ -74,7 +74,7 @@ As we can see above, we have a `common` folder and an `eslint` folder. Note that
 }
 ```
 
-(Clown will merge this `eslint/package.json` fragment with the `package.json` in the root of our project that we want to extend after we run Clown.)
+(clown will merge this `eslint/package.json` fragment with the `package.json` in the root of our project that we want to extend after we run clown.)
 
 The next step would be to create a `clown.json` file at the root of our project.
 
@@ -89,7 +89,7 @@ The next step would be to create a `clown.json` file at the root of our project.
 }
 ```
 
-Now it's time to run Clown. Run:
+Now it's time to run clown. Run:
 
 ```bash
 yarn clown
@@ -97,7 +97,7 @@ yarn clown
 # npm run clown
 ```
 
-What Clown will do is look at each of the `extensions` folders that we have specified, go inside it, and merge or copy its content
+What clown will do is look at each of the `extensions` folders that we have specified, go inside it, and merge or copy its content
 with the content at the root of our repo.
 
 The end result will be:
@@ -113,15 +113,15 @@ The end result will be:
 |-- LICENSE # copied over from `common/LICENSE`
 ```
 
-### How Clown handles different file types
+### How clown handles different file types
 
 #### Non-existing files
 
-If Clown encounters a configuration file that doesn't exist in the destination project, it will copy the file over as-is.
+If clown encounters a configuration file that doesn't exist in the destination project, it will copy the file over as-is.
 
 #### Existing files
 
-If Clown encounters a configuration file that exists in both the extension folder and the destination project, it will try to merge
+If clown encounters a configuration file that exists in both the extension folder and the destination project, it will try to merge
 the content of the extension file with the content of the destination file if it knows how.
 
 ##### JSON files
@@ -130,17 +130,17 @@ JSON files will be merged in a manner that we think works better for configurati
 
 ##### `.gitignore`, `.npmignore`, etc
 
-For dot-ignore files, Clown will make sure that the lines in the extension file exist in the destination file.
+For dot-ignore files, clown will make sure that the lines in the extension file exist in the destination file.
 
 ##### Other file types
 
-Currently, Clown only knows how to handle the file types above. For other file types, Clown will overwrite the current content
+Currently, clown only knows how to handle the file types above. For other file types, clown will override the current content
 with the content from the extension file.
 
 ### Ensuring up-to-date configurations
 
 We might want to make sure that our project configurations don't diverge from our scaffolded and shared configurations. For this
-purpose the Clown CLI provides
+purpose the clown CLI provides
 
 ```bash
 yarn clown check
@@ -148,12 +148,12 @@ yarn clown check
 # npm run clown check
 ```
 
-When we run this command, Clown will figure out what our configuration files would look like if they were to be extended by Clown
+When we run this command, clown will figure out what our configuration files would look like if they were to be extended by clown
 itself. After it figures this out, it will compare the result with what actually exists. If it sees that the two results are different, it will print an error message telling us which files are different and how they are different.
 
 ### Overriding configurations
 
-_Extension folders that appear later in the `extensions` array, overwrite the values of previous extension folders._
+_Extension folders that appear later in the `extensions` array, override the values of previous extension folders._
 
 That means we can override configurations by creating any local folder and specifying it in our `clown.json` `extensions` array, like
 so:
@@ -169,3 +169,9 @@ so:
 ```
 
 We can put in `./config-overrides` any files or fragments that we wish to override the previous configurations with.
+
+#### `clownCallback.js`
+
+Another way to override content is by using `clownCallback.js`. If the extension folder contains a file called `clownCallback.js`,
+that file will be treated differently. `clownCallback.js` is expected to be a module that exports a function. The function
+will receive a `clownFilesystem`, which contains the content that clown

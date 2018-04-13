@@ -22,7 +22,7 @@ import { ensureHasFinalNewLine } from './ensureHasFinalNewLine';
 
 // tslint:disable-next-line:max-func-body-length
 export async function computeFileContents(cwd: string) {
-  /* for Clown to work, the user has to have a file called `clown.json` at the location
+  /* for clown to work, the user has to have a file called `clown.json` at the location
   where they are running the script */
   const clownConfigPath = getClownConfigPath(cwd);
   const clownConfigContent = (await fs.readJson(
@@ -103,7 +103,7 @@ export async function computeFileContents(cwd: string) {
           );
         }
 
-        /* We consider the directory of the Clown config file to be the base from which we resolve
+        /* We consider the directory of the clown config file to be the base from which we resolve
         the location of the destination file. So, if `clown.js` is located at `/some/path/clown.js`
         and the source file is located at `/other/location/package.json` then the location of the
         destination `package.json` is `/some/path/package.json`. That's what the few lines of code
