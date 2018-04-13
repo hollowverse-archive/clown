@@ -48,10 +48,13 @@ export async function computeFileContents(cwd: string) {
   const extensionPathsAndSourceFiles = await bluebird.map(
     clownConfigContent.extensions,
     async (extensionPath: string) => {
-      return [
-        extensionPath,
-        await glob('**', { dot: true, cwd: extensionPath }),
-      ] as ExtensionPathAndSourceFiles;
+      const sourceFiles = await glob('**', { dot: true, cwd: extensionPath });
+
+      if (sourceFiles.length === 0) {
+        throw new Error(`${extensionPath} does not exist or has no content`);
+      }
+
+      return [extensionPath, sourceFiles] as ExtensionPathAndSourceFiles;
     },
   );
 
