@@ -759,9 +759,9 @@
     fast-extend "0.0.2"
     fs-monkey "^0.3.0"
 
-"@hollowverse/clown@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@hollowverse/clown/-/clown-1.0.0.tgz#6f3bea6071ea1f80d995895be06048c3bbdbebf5"
+"@hollowverse/clown@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@hollowverse/clown/-/clown-2.0.0.tgz#818c44fc7cf20bf1e93f40c8e505805ea8192727"
   dependencies:
     "@babel/polyfill" "^7.0.0-beta.44"
     "@babel/runtime" "^7.0.0-beta.44"
@@ -775,10 +775,11 @@
     globby "^8.0.1"
     jest-diff "^22.4.3"
     lodash "^4.17.4"
+    sort-keys "^2.0.0"
 
-"@hollowverse/config@^9.0.0":
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/@hollowverse/config/-/config-9.0.0.tgz#4c12b8099e2a807164c64a79c21d6fdd55ee03dd"
+"@hollowverse/config@^10.0.0":
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/@hollowverse/config/-/config-10.0.0.tgz#e434237f449d0a2f68aa58eae37a3c6f0d80b6d3"
   dependencies:
     "@babel/core" "7.0.0-beta.44"
     "@babel/plugin-proposal-object-rest-spread" "^7.0.0-beta.44"
@@ -802,10 +803,11 @@
     tslint-react "^3.5.1"
     typescript-eslint-parser "^14.0.0"
 
-"@hollowverse/utils@^5.0.2":
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/@hollowverse/utils/-/utils-5.0.2.tgz#bfce9b165741f99b5d9b66d5f34477a66350422d"
+"@hollowverse/utils@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@hollowverse/utils/-/utils-6.0.0.tgz#d9b978531a445f5d031ab72af066424358df1bf0"
   dependencies:
+    "@babel/polyfill" "^7.0.0-beta.44"
     "@babel/runtime" "^7.0.0-beta.44"
     "@types/aws-lambda" "^0.0.34"
     bluebird "^3.5.1"
