@@ -17,6 +17,7 @@ import {
 import glob from 'globby';
 import fs from 'fs-extra';
 import { jsonStringify } from './jsonStringify';
+import { ClownFilesystem } from './ClownFilesystem';
 
 // tslint:disable-next-line:max-func-body-length
 export async function computeFileContents(cwd: string) {
@@ -70,11 +71,20 @@ export async function computeFileContents(cwd: string) {
   */
   return bluebird.reduce(
     extensionPathsAndSourceFiles,
+    /* tslint:disable max-func-body-length */
     async (
       fileContents: FileContents,
       [extensionPath, sourceFiles]: ExtensionPathAndSourceFiles,
     ) => {
+      let clownCallbackPath: string | null = null;
+
       await bluebird.each(sourceFiles, async sourceFile => {
+        if (path.basename(sourceFile) === 'clownCallback.js') {
+          clownCallbackPath = path.resolve(extensionPath, sourceFile);
+
+          return;
+        }
+
         /* We will need to merge each of the source files of this extension path with their targeted
         destination files. That's why we need to loop through the source files. */
 
@@ -101,7 +111,7 @@ export async function computeFileContents(cwd: string) {
 
         /* Before we can determine what the content of the destination file will ultimately be,
         we need to read the existing content so that we can merge the content of the source files
-        with it. So if we don't yet have a value for the destination file conent, let's assign
+        with it. So if we don't yet have a value for the destination file content, let's assign
         its initial value. */
         if (fileContents[destinationFilePath] === undefined) {
           const destinationFileContent = await readFile(destinationFilePath);
@@ -161,6 +171,17 @@ export async function computeFileContents(cwd: string) {
 
         return;
       });
+
+      if (clownCallbackPath) {
+        const clownFilesystem = new ClownFilesystem(fileContents);
+
+        // tslint:disable:next non-literal-require no-parameter-reassignment
+        fileContents =
+          require(clownCallbackPath)(clownFilesystem) ||
+          clownFilesystem.fileContents;
+
+        clownCallbackPath = null;
+      }
 
       /* When the `each` loop above finishes, that means we have computed all of our file contents.
       Let's return them. */

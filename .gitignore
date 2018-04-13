@@ -41,7 +41,4 @@ node_modules/
 # Builds
 dist
 
-# Editor configs
-.vscode
-
 bin
