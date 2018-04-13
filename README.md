@@ -170,8 +170,30 @@ so:
 
 We can put in `./config-overrides` any files or fragments that we wish to override the previous configurations with.
 
-#### `clownCallback.js`
+### `clownCallback.js`
 
-Another way to override content is by using `clownCallback.js`. If the extension folder contains a file called `clownCallback.js`,
-that file will be treated differently. `clownCallback.js` is expected to be a module that exports a function. The function
-will receive a `clownFilesystem`, which contains the content that clown
+Another way to override content is by using `clownCallback.js`.
+
+Put `clownCallback.js` in the extension folder and export a function from it. The exported function will receive an instance of [`clownFilesystem`](https://github.com/hollowverse/clown/blob/3873ac8891c240747035a4e671d3668b3adbf759/src/ClownFilesystem.ts), which gives access to all the file contents that clown has computed before clown writes those file contents to disk.
+
+Using `clownCallback.js` you can edit, delete, or add files.
+
+For example, in `./config-overrides/clownCallback.js` we can have the following code:
+
+```js
+module.exports = clownFilesystem => {
+  clownFilesystem.editJson('/package.json', pkgJson => {
+    delete pkgJson.foo;
+
+    return pkgJson;
+  });
+
+  return clownFilesystem.fileContents;
+};
+```
+
+## For issues or questions
+
+A lot of the above may very well not make much sense. So feel free to post issues or questions here:
+
+https://github.com/hollowverse/hollowverse/issues
