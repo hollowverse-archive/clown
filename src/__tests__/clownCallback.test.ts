@@ -71,7 +71,7 @@ describe('clownCallback.js', () => {
     jest.doMock(
       '/clownOverride/clownCallback.js',
       () => (clownFs: any) => {
-        return clownFs.deleteFile('/newJsonFile.json').fileContents;
+        return clownFs.remove('/newJsonFile.json').fileContents;
       },
       { virtual: true },
     );
