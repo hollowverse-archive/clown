@@ -1,5 +1,6 @@
 import { FileContents } from './types';
 import { jsonStringify } from './jsonStringify';
+import path from 'path';
 
 export class ClownFilesystem {
   fileContents: FileContents;
@@ -17,6 +18,11 @@ export class ClownFilesystem {
 
     return this;
   };
+
+  findFilePathByBaseName = (baseName: string) =>
+    Object.keys(this.fileContents).find(
+      filePath => path.basename(filePath) === baseName,
+    );
 
   editJson = (
     filePath: string,
