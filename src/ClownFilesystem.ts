@@ -2,6 +2,8 @@ import { FileContents } from './types';
 import { jsonStringify } from './jsonStringify';
 import path from 'path';
 
+const getFullPath = (filePath: string) => path.resolve(process.cwd(), filePath);
+
 export class ClownFilesystem {
   fileContents: FileContents;
   jsonStringify = jsonStringify;
@@ -11,28 +13,53 @@ export class ClownFilesystem {
     this.fileContents = fileContents;
   }
 
-  deleteFile = (filePath: string, fileContents = this.fileContents) => {
-    delete fileContents[filePath];
+  add = (
+    relativePath: string,
+    computedContent: string,
+    fileContents = this.fileContents,
+  ) => {
+    const fullPath = getFullPath(relativePath);
+
+    fileContents[fullPath].computedContent = computedContent;
 
     this.fileContents = fileContents;
 
     return this;
   };
 
-  findFilePathByBaseName = (baseName: string) =>
-    Object.keys(this.fileContents).find(
-      filePath => path.basename(filePath) === baseName,
-    );
+  remove = (relativePath: string, fileContents = this.fileContents) => {
+    delete fileContents[getFullPath(relativePath)];
+
+    this.fileContents = fileContents;
+
+    return this;
+  };
 
   editJson = (
-    filePath: string,
+    relativePath: string,
     cb: (json: any) => any,
     fileContents = this.fileContents,
   ) => {
-    const jsonContent = this.jsonParse(fileContents[filePath].computedContent);
+    const fullPath = getFullPath(relativePath);
+    const jsonContent = this.jsonParse(fileContents[fullPath].computedContent);
     const newJsonContent = cb(jsonContent);
 
-    fileContents[filePath].computedContent = this.jsonStringify(newJsonContent);
+    fileContents[fullPath].computedContent = this.jsonStringify(newJsonContent);
+
+    this.fileContents = fileContents;
+
+    return this;
+  };
+
+  editString = (
+    relativePath: string,
+    cb: (json: any) => any,
+    fileContents = this.fileContents,
+  ) => {
+    const fullPath = getFullPath(relativePath);
+    const newContent = cb(fileContents[fullPath].computedContent);
+
+    fileContents[fullPath].computedContent = newContent;
 
     this.fileContents = fileContents;
 
