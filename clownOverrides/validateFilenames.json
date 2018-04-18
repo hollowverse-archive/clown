@@ -1,0 +1,12 @@
+{
+  "rules": [
+    {
+      "validation": "PascalCase",
+      "patterns": ["**/src/ClownFilesystem.ts"]
+    },
+    {
+      "validation": "ignore",
+      "patterns": ["**/src/cli/**"]
+    }
+  ]
+}
