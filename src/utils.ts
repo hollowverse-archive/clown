@@ -51,43 +51,37 @@ export function isArrayOfObjects(value: any[]) {
   return _.isArray(value) && _.every(value, _.isObject);
 }
 
-export function keyIsPotentialId(arrayOfObjects: any[], key: string) {
-  const valuesOfKey = arrayOfObjects.map((obj: any) => obj[key]);
-
-  return (
-    isArrayOfStrings(valuesOfKey) &&
-    _.uniq(valuesOfKey).length === arrayOfObjects.length
-  );
-}
-
 export function isArrayOfStrings(value: any[]) {
   return _.isArray(value) && _.every(value, _.isString);
 }
 
+export function keyIsPotentialId(arrayOfObjects: any[], key: string) {
+  const valuesOfKey = arrayOfObjects.map((obj: any) => obj[key]);
+
+  return _.uniqWith(valuesOfKey, _.isEqual).length === arrayOfObjects.length;
+}
+
+/** Find the first key which every single object in `records` has */
 export function guessKeyWithUniqueValue(records: any[]) {
-  const sampleRecord = records[0];
-  const potentialKeys = _.mapValues(sampleRecord, (_value, key) =>
-    keyIsPotentialId(records, key),
+  const allKeys = _.flatten(
+    records.map(r => _.keys(r).filter(k => keyIsPotentialId(records, k))),
   );
 
-  const firstPotentialKey = _.findKey(potentialKeys);
-
-  if (firstPotentialKey === undefined) {
-    throw new Error(
-      `Could not guess record ID. Example record: ${JSON.stringify(
-        sampleRecord,
-      )}`,
-    );
-  }
-
-  return firstPotentialKey;
+  return _.find(allKeys, key =>
+    _.every(records, record => _.hasIn(record, key)),
+  );
 }
 
 export function isArrayOfUnmergeables(arr: any[]) {
-  return _.isArray(arr) && _.every(arr, isUnmergeable);
+  return (
+    _.isArray(arr) &&
+    (_.every(arr, isOfUnmergeableType) ||
+      (_.every(arr, _.isPlainObject) &&
+        guessKeyWithUniqueValue(arr) === undefined))
+  );
 }
 
-export function isUnmergeable(value: any) {
+export function isOfUnmergeableType(value: any) {
   return _.some(
     [
       _.isString,

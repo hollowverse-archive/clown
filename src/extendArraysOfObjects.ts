@@ -36,6 +36,14 @@ export function extendArraysOfObjects(
   So first, let's find the unique key for our objects. */
   const uniqueKey = guessKeyWithUniqueValue(destination);
 
+  if (uniqueKey === undefined) {
+    throw new Error(
+      `Could not guess record ID. Example record: ${JSON.stringify(
+        destination[0],
+      )}`,
+    );
+  }
+
   /* Since we'll be merging all objects that have the same key together,
   we don't need the two config objects to be separate, we can combine them all into
   one array, like this:

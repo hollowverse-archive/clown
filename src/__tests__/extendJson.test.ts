@@ -97,6 +97,149 @@ describe('extendJson', () => {
 
       expect(extendJson(config1, config2)).toEqual(result);
     });
+
+    it('works 4', () => {
+      const config1 = [
+        {
+          fileMatch: ['**/clown.json'],
+          schema: {
+            $id: 'https://github.com/hollowverse/clown',
+            type: 'object',
+            definitions: {},
+          },
+        },
+      ];
+
+      const config2 = [
+        {
+          fileMatch: ['**/.graphqlconfig'],
+          url: 'https://json.schemastore.org/graphqlconfig',
+        },
+      ];
+
+      const result = [
+        {
+          fileMatch: ['**/clown.json'],
+          schema: {
+            $id: 'https://github.com/hollowverse/clown',
+            type: 'object',
+            definitions: {},
+          },
+        },
+        {
+          fileMatch: ['**/.graphqlconfig'],
+          url: 'https://json.schemastore.org/graphqlconfig',
+        },
+      ];
+
+      expect(extendJson(config1, config2)).toEqual(result);
+    });
+
+    it('works 5', () => {
+      const config1 = [
+        {
+          fileMatch: ['**/clown.json'],
+          schema: {
+            $id: 'https://github.com/hollowverse/clown',
+            type: 'object',
+            definitions: {},
+          },
+        },
+      ];
+
+      const config2 = [
+        {
+          fileMatch: ['**/.graphqlconfig'],
+          url: 'https://json.schemastore.org/graphqlconfig',
+        },
+        {
+          fileMatch: ['**/clown.json'],
+          schema: {
+            $id: 'https://github.com/hollowverse/clown',
+            type: 'object',
+            definitions: {},
+          },
+        },
+      ];
+
+      const result = [
+        {
+          fileMatch: ['**/clown.json'],
+          schema: {
+            $id: 'https://github.com/hollowverse/clown',
+            type: 'object',
+            definitions: {},
+          },
+        },
+        {
+          fileMatch: ['**/.graphqlconfig'],
+          url: 'https://json.schemastore.org/graphqlconfig',
+        },
+      ];
+
+      expect(extendJson(config1, config2)).toEqual(result);
+    });
+
+    it('works 6', () => {
+      const config1 = [
+        {
+          fileMatch: ['**/clown.json'],
+          schema: {
+            $id: 'https://github.com/hollowverse/clown',
+            type: 'object',
+            definitions: {},
+          },
+        },
+        {
+          fileMatch: ['**/.stylelintrc.json'],
+          schema: {
+            $id: 'https://json.schemastore.org/stylelintrc',
+            type: 'object',
+            definitions: {},
+          },
+        },
+      ];
+
+      const config2 = [
+        {
+          fileMatch: ['**/.graphqlconfig'],
+          url: 'https://json.schemastore.org/graphqlconfig',
+        },
+        {
+          fileMatch: ['**/clown.json'],
+          schema: {
+            $id: 'https://github.com/hollowverse/clown',
+            type: 'object',
+            definitions: {},
+          },
+        },
+      ];
+
+      const result = [
+        {
+          fileMatch: ['**/clown.json'],
+          schema: {
+            $id: 'https://github.com/hollowverse/clown',
+            type: 'object',
+            definitions: {},
+          },
+        },
+        {
+          fileMatch: ['**/.stylelintrc.json'],
+          schema: {
+            $id: 'https://json.schemastore.org/stylelintrc',
+            type: 'object',
+            definitions: {},
+          },
+        },
+        {
+          fileMatch: ['**/.graphqlconfig'],
+          url: 'https://json.schemastore.org/graphqlconfig',
+        },
+      ];
+
+      expect(extendJson(config1, config2)).toEqual(result);
+    });
   });
 
   describe('merging plain objects', () => {
