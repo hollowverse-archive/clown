@@ -192,6 +192,18 @@ module.exports = clownFilesystem => {
 };
 ```
 
+### Escaping filenames
+
+Some filenames, such as `.eslintrc.json` and `package.json`, have special meaning to tools, so when
+files with these names exist in our `config-overrides` folder, they could confuse these tools (see
+[this discussion](https://github.com/hollowverse/hollowverse/issues/413)).
+
+That's why clown makes it possible to "escape" these filenames by appending `c__` to the filename.
+
+If our `config-overrides`
+contains a file named `c__package.json`, clown would know that the target destination for this file is
+`package.json` and would merge the configurations correctly.
+
 ## For issues or questions
 
 A lot of the above may very well not make much sense. So feel free to post issues or questions here:
