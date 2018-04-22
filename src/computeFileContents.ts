@@ -20,6 +20,7 @@ import { jsonStringify } from './jsonStringify';
 import { ClownFilesystem } from './ClownFilesystem';
 import { ensureHasFinalNewLine } from './ensureHasFinalNewLine';
 import json5 from 'json5';
+import { normalizeBasename } from './normalizeBasename';
 
 // tslint:disable-next-line:max-func-body-length
 export async function computeFileContents(cwd: string) {
@@ -111,7 +112,14 @@ export async function computeFileContents(cwd: string) {
         below compute. */
         const destinationFilePath = path.resolve(
           path.dirname(clownConfigPath),
-          sourceFile,
+
+          /* Sometimes the user might need to escape the name of the config source file as
+          discussed here: https://github.com/hollowverse/hollowverse/issues/413. clown gives
+          users the ability to escape filenames by appending `c__` to the filename.
+
+          `normalizeBasename` removes the `c__` if it exists so that the destination file path
+          will be without the `c__`. */
+          normalizeBasename(sourceFile),
         );
 
         /* Before we can determine what the content of the destination file will ultimately be,
