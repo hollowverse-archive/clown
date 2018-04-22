@@ -697,9 +697,9 @@
     fast-extend "0.0.2"
     fs-monkey "^0.3.0"
 
-"@hollowverse/clown@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@hollowverse/clown/-/clown-2.0.0.tgz#818c44fc7cf20bf1e93f40c8e505805ea8192727"
+"@hollowverse/clown@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@hollowverse/clown/-/clown-3.0.1.tgz#cb49233eefb843552cc1774436d9b3bf13f6840d"
   dependencies:
     "@babel/polyfill" "^7.0.0-beta.44"
     "@babel/runtime" "^7.0.0-beta.44"
@@ -715,13 +715,13 @@
     lodash "^4.17.4"
     sort-keys "^2.0.0"
 
-"@hollowverse/config@^22.0.0":
-  version "22.0.0"
-  resolved "https://registry.yarnpkg.com/@hollowverse/config/-/config-22.0.0.tgz#73d3d83bc235f5733187f0e40b0beab06a724637"
+"@hollowverse/config@^29.0.0":
+  version "29.0.0"
+  resolved "https://registry.yarnpkg.com/@hollowverse/config/-/config-29.0.0.tgz#f49b5d41690f344fdcecaf02791412436337d7e0"
 
-"@hollowverse/utils@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@hollowverse/utils/-/utils-6.0.0.tgz#d9b978531a445f5d031ab72af066424358df1bf0"
+"@hollowverse/utils@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/@hollowverse/utils/-/utils-6.0.1.tgz#2ad5f8a4b7d78320f94c6b9152655e025193baf1"
   dependencies:
     "@babel/polyfill" "^7.0.0-beta.44"
     "@babel/runtime" "^7.0.0-beta.44"
@@ -734,9 +734,9 @@
     minimatch "^3.0.4"
     shelljs "^0.7.8"
 
-"@hollowverse/validate-filenames@^3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@hollowverse/validate-filenames/-/validate-filenames-3.0.1.tgz#a3a6fe488162d19d256e2cc5fa093af16e1b1aff"
+"@hollowverse/validate-filenames@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@hollowverse/validate-filenames/-/validate-filenames-3.0.2.tgz#60610109b63bed5285f3435e32ce721c5f623f1d"
   dependencies:
     "@babel/polyfill" "^7.0.0-beta.44"
     "@babel/runtime" "^7.0.0-beta.44"
@@ -1530,6 +1530,12 @@ cache-base@^1.0.1:
 call-me-maybe@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/call-me-maybe/-/call-me-maybe-1.0.1.tgz#26d208ea89e37b5cbde60250a15f031c16a4d66b"
+
+caller-id@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/caller-id/-/caller-id-0.1.0.tgz#59bdac0893d12c3871408279231f97458364f07b"
+  dependencies:
+    stack-trace "~0.0.7"
 
 caller-path@^0.1.0:
   version "0.1.0"
@@ -4478,6 +4484,12 @@ mixin-deep@^1.2.0:
   dependencies:
     minimist "0.0.8"
 
+mock-require@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/mock-require/-/mock-require-2.0.2.tgz#1eaa71aad23013773d127dc7e91a3fbb4837d60d"
+  dependencies:
+    caller-id "^0.1.0"
+
 modify-values@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/modify-values/-/modify-values-1.0.1.tgz#b3939fa605546474e3e3e3c63d64bd43b4ee6022"
@@ -5813,6 +5825,10 @@ sshpk@^1.7.0:
     jsbn "~0.1.0"
     tweetnacl "~0.14.0"
 
+stack-trace@~0.0.7:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/stack-trace/-/stack-trace-0.0.10.tgz#547c70b347e8d32b4e108ea1a2a159e5fdde19c0"
+
 stack-utils@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/stack-utils/-/stack-utils-1.0.1.tgz#d4f33ab54e8e38778b0ca5cfd3b3afb12db68620"
@@ -6157,6 +6173,12 @@ tslint-eslint-rules@^5.0.0:
     doctrine "0.7.2"
     tslib "1.9.0"
     tsutils "2.8.0"
+
+tslint-language-service@^0.9.9:
+  version "0.9.9"
+  resolved "https://registry.yarnpkg.com/tslint-language-service/-/tslint-language-service-0.9.9.tgz#f546dc38483979e6fb3cfa59584ad8525b3ad4da"
+  dependencies:
+    mock-require "^2.0.2"
 
 tslint-microsoft-contrib@^5.0.3:
   version "5.0.3"

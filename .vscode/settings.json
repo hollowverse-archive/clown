@@ -1,5 +1,11 @@
 {
-  "cSpell.words": ["hollowverse", "loglevel", "promisify", "webpagetest"],
+  "cSpell.words": [
+    "hollowverse",
+    "loglevel",
+    "promisify",
+    "webpagetest",
+    "unhandledrejection"
+  ],
   "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "[json]": {
@@ -14,5 +20,9 @@
   "files.exclude": {
     "**/node_modules/**": true
   },
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "eslint.options": {
+    "reportUnusedDisableDirectives": true
+  },
+  "eslint.validate": ["typescript", "typescriptreact"]
 }
