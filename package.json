@@ -67,6 +67,7 @@
     "fs-extra": "^5.0.0",
     "globby": "^8.0.1",
     "jest-diff": "^22.4.3",
+    "json5": "^1.0.1",
     "lodash": "^4.17.4",
     "sort-keys": "^2.0.0"
   },
@@ -91,6 +92,7 @@
     "@types/globby": "^6.1.0",
     "@types/jest": "^22.2.0",
     "@types/jest-diff": "^20.0.0",
+    "@types/json5": "^0.0.29",
     "@types/lodash": "^4.14.85",
     "@types/node": "^8.0.53",
     "@types/shelljs": "^0.7.6",

@@ -19,6 +19,7 @@ import fs from 'fs-extra';
 import { jsonStringify } from './jsonStringify';
 import { ClownFilesystem } from './ClownFilesystem';
 import { ensureHasFinalNewLine } from './ensureHasFinalNewLine';
+import json5 from 'json5';
 
 // tslint:disable-next-line:max-func-body-length
 export async function computeFileContents(cwd: string) {
@@ -153,10 +154,10 @@ export async function computeFileContents(cwd: string) {
           isMergeableJsonContent(sourceFileContent)
         ) {
           const extendedContent = extendJson(
-            JSON.parse(
+            json5.parse(
               fileContents[destinationFilePath].computedContent || '{}',
             ),
-            JSON.parse(sourceFileContent),
+            json5.parse(sourceFileContent),
           );
 
           fileContents[destinationFilePath].computedContent = jsonStringify(
