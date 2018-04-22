@@ -13,8 +13,7 @@ describe('escaped filenames support', () => {
         "extensions": ["/clownExtensionA"]
       }`,
       '/clownExtensionA/c__package.json': `{
-        // No problamo
-        "foo": "bar",
+        "foo": "bar"
       }`,
       '/package.json': `{
         "name": "Stuff"
@@ -34,8 +33,7 @@ describe('escaped filenames support', () => {
         "extensions": ["/clownExtensionA"]
       }`,
       '/clownExtensionA/folder/c__package.json': `{
-        // No problamo
-        "foo": "bar",
+        "foo": "bar"
       }`,
       '/folder/package.json': `{
         "name": "Stuff"
