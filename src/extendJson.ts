@@ -2,19 +2,19 @@ import _ from 'lodash';
 import {
   isArrayOfObjects,
   isArrayOfUnmergeables,
-  isUnmergeable,
+  isOfUnmergeableType,
 } from './utils';
 import { extendArraysOfObjects } from './extendArraysOfObjects';
 
 export function extendJson(destination: any, source: any): any {
   const configs = [destination, source];
 
-  if (_.every(configs, isUnmergeable)) {
+  if (_.every(configs, isOfUnmergeableType)) {
     return source;
   }
 
   if (_.every(configs, isArrayOfUnmergeables)) {
-    return _.uniq([...destination, ...source]);
+    return _.uniqWith([...destination, ...source], _.isEqual);
   }
 
   if (_.every(configs, isArrayOfObjects)) {

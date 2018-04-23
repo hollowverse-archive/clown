@@ -14,6 +14,7 @@ export function printErrors(discrepancies: Discrepancies) {
           ? 'What it should be'
           : 'Expected to exist with content',
         bAnnotation: received ? 'What it is' : 'It does not exist',
+        contextLines: 5,
       }),
     );
   });
