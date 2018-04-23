@@ -1,13 +1,14 @@
 import { FileContents } from './types';
 import { jsonStringify } from './jsonStringify';
 import path from 'path';
+import json5 from 'json5';
 
 const getFullPath = (filePath: string) => path.resolve(process.cwd(), filePath);
 
 export class ClownFilesystem {
   fileContents: FileContents;
   jsonStringify = jsonStringify;
-  jsonParse = JSON.parse;
+  jsonParse = json5.parse;
 
   constructor(fileContents: FileContents) {
     this.fileContents = fileContents;

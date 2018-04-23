@@ -2,6 +2,7 @@ import { ClownConfig } from './types';
 import _ from 'lodash';
 import fs from 'fs-extra';
 import path from 'path';
+import json5 from 'json5';
 
 export function getClownConfigPath(cwd: string) {
   return path.resolve(cwd, 'clown.json');
@@ -34,7 +35,7 @@ export function isMergeableJsonContent(str: string) {
   let content: any;
 
   try {
-    content = JSON.parse(str);
+    content = json5.parse(str);
   } catch (e) {
     return false;
   }

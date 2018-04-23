@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`escaped filenames support use case 1 1`] = `
+"{
+        'name': 'Stuff',
+        'foo': 'bar'
+}
+"
+`;
+
+exports[`escaped filenames support use case 2 deep path 1`] = `
+"{
+        'name': 'Stuff',
+        'foo': 'bar'
+}
+"
+`;

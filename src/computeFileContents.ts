@@ -17,8 +17,10 @@ import {
 import glob from 'globby';
 import fs from 'fs-extra';
 import { jsonStringify } from './jsonStringify';
-import { ClownFilesystem } from './ClownFilesystem';
 import { ensureHasFinalNewLine } from './ensureHasFinalNewLine';
+import json5 from 'json5';
+import { normalizeBasename } from './normalizeBasename';
+import { postProcess } from './postProcess';
 
 // tslint:disable-next-line:max-func-body-length
 export async function computeFileContents(cwd: string) {
@@ -78,17 +80,11 @@ export async function computeFileContents(cwd: string) {
     /* tslint:disable max-func-body-length */
     async (
       fileContents: FileContents,
-      [extensionPath, sourceFiles]: ExtensionPathAndSourceFiles,
+      extensionPathAndSourceFiles: ExtensionPathAndSourceFiles,
     ) => {
-      let clownCallbackPath: string | null = null;
+      const [extensionPath, sourceFiles] = extensionPathAndSourceFiles;
 
       await bluebird.each(sourceFiles, async sourceFile => {
-        if (path.basename(sourceFile) === 'clownCallback.js') {
-          clownCallbackPath = path.resolve(extensionPath, sourceFile);
-
-          return;
-        }
-
         /* We will need to merge each of the source files of this extension path with their targeted
         destination files. That's why we need to loop through the source files. */
 
@@ -110,7 +106,14 @@ export async function computeFileContents(cwd: string) {
         below compute. */
         const destinationFilePath = path.resolve(
           path.dirname(clownConfigPath),
-          sourceFile,
+
+          /* Sometimes the user might need to escape the name of the config source file as
+          discussed here: https://github.com/hollowverse/hollowverse/issues/413. clown gives
+          users the ability to escape filenames by appending `c__` to the filename.
+
+          `normalizeBasename` removes the `c__` if it exists so that the destination file path
+          will be without the `c__`. */
+          normalizeBasename(sourceFile),
         );
 
         /* Before we can determine what the content of the destination file will ultimately be,
@@ -153,10 +156,10 @@ export async function computeFileContents(cwd: string) {
           isMergeableJsonContent(sourceFileContent)
         ) {
           const extendedContent = extendJson(
-            JSON.parse(
+            json5.parse(
               fileContents[destinationFilePath].computedContent || '{}',
             ),
-            JSON.parse(sourceFileContent),
+            json5.parse(sourceFileContent),
           );
 
           fileContents[destinationFilePath].computedContent = jsonStringify(
@@ -176,22 +179,15 @@ export async function computeFileContents(cwd: string) {
         return;
       });
 
-      if (clownCallbackPath) {
-        const clownFilesystem = new ClownFilesystem(fileContents);
-
-        // tslint:disable:next non-literal-require no-parameter-reassignment
-        fileContents =
-          require(clownCallbackPath)(clownFilesystem) ||
-          clownFilesystem.fileContents;
-
-        clownCallbackPath = null;
-      }
-
-      fileContents = ensureHasFinalNewLine(fileContents);
+      /* `postProcess` gives users a chance to edit file contents before clown writes them to disk */
+      const postProcessedFileContents = postProcess(
+        fileContents,
+        extensionPathAndSourceFiles,
+      );
 
       /* When the `each` loop above finishes, that means we have computed all of our file contents.
       Let's return them. */
-      return fileContents;
+      return ensureHasFinalNewLine(postProcessedFileContents);
     },
     {},
   );
