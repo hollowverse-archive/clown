@@ -32,7 +32,7 @@ describe('clownCallback.js', () => {
     vol.fromJSON(files);
 
     jest.doMock(
-      '/clownOverride/clownCallback.js',
+      `${process.cwd()}/clownOverride/clownCallback.js`,
       () => (clownFs: any) => {
         return clownFs.editJson('/package.json', (pkgJson: any) => {
           delete pkgJson.foo;
@@ -69,7 +69,7 @@ describe('clownCallback.js', () => {
     vol.fromJSON(files);
 
     jest.doMock(
-      '/clownOverride/clownCallback.js',
+      `${process.cwd()}/clownOverride/clownCallback.js`,
       () => (clownFs: any) => {
         return clownFs.remove('/newJsonFile.json').fileContents;
       },
