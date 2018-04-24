@@ -99,6 +99,15 @@ export async function computeFileContents(cwd: string) {
           );
         }
 
+        const basename = path.basename(sourceFilePath);
+
+        if (
+          basename === 'clownCallback.js' ||
+          basename === 'clownCallback.ts'
+        ) {
+          return;
+        }
+
         /* We consider the directory of the clown config file to be the base from which we resolve
         the location of the destination file. So, if `clown.js` is located at `/some/path/clown.js`
         and the source file is located at `/other/location/package.json` then the location of the
