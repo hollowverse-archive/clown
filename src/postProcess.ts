@@ -23,6 +23,7 @@ export function postProcess(
 
   // tslint:disable:next non-literal-require no-parameter-reassignment
   return (
-    require(clownCallbackPath)(clownFilesystem) || clownFilesystem.fileContents
+    require(path.join(process.cwd(), clownCallbackPath))(clownFilesystem) ||
+    clownFilesystem.fileContents
   );
 }
