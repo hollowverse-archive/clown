@@ -80,4 +80,36 @@ describe('clownCallback.js', () => {
 
     expect(fs.existsSync('/newJsonFile.json')).toBe(false);
   });
+
+  it('is executed but not copied over to the destination directory', async () => {
+    const files = {
+      '/clown.json': `{
+        "extensions": [
+          "/clownExtensionA",
+          "/clownOverride"
+        ]
+      }`,
+      '/clownExtensionA/newJsonFile.json': `{
+        "foo": "a",
+        "bar": "b"
+      }`,
+    };
+
+    const spy = jest.fn();
+
+    jest.doMock(`${process.cwd()}/clownOverride/clownCallback.js`, () => spy, {
+      virtual: true,
+    });
+
+    // @ts-ignore
+    files['/clownOverride/clownCallback.js'] = '';
+
+    vol.fromJSON(files);
+
+    await extendConfig('/');
+
+    expect(spy).toHaveBeenCalled();
+
+    expect(fs.existsSync('/clownCallback.js')).toBe(false);
+  });
 });
