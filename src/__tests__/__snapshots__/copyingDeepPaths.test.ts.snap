@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`copying from deep paths works 1`] = `
+"{
+        'b': '1',
+        'a': '1'
+}
+"
+`;
+
+exports[`copying from deep paths works 2`] = `
+"{
+        'b': '1',
+        'a': '1'
+}
+"
+`;
+
+exports[`copying from deep paths works 3`] = `
+"{
+  'a': '1'
+}
+"
+`;

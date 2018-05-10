@@ -2,6 +2,7 @@ import { extendConfig } from '../extendConfig';
 import { readJsonNoDoubleQuotes } from '../../mockAndTestHelpers/readJsonNoDoubleQuotes';
 import { vol } from '@forabi/memfs';
 import fs from 'fs';
+import { omit } from 'lodash';
 
 describe('clownCallback.js', () => {
   beforeEach(() => {
@@ -35,9 +36,7 @@ describe('clownCallback.js', () => {
       `${process.cwd()}/clownOverride/clownCallback.js`,
       () => (clownFs: any) => {
         return clownFs.editJson('/package.json', (pkgJson: any) => {
-          delete pkgJson.foo;
-
-          return pkgJson;
+          return omit(pkgJson, 'foo');
         }).fileContents;
       },
       { virtual: true },

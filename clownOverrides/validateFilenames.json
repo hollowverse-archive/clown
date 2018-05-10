@@ -6,7 +6,7 @@
     },
     {
       "validation": "ignore",
-      "patterns": ["**/src/cli/**"]
+      "patterns": ["**/src/cli/**", "**/c__*"]
     }
   ]
 }

@@ -1,3 +1,4 @@
 declare module 'sort-keys' {
-  export default function(a: any): any;
+  const sortKeys: <T>(a: T) => T;
+  export = sortKeys;
 }

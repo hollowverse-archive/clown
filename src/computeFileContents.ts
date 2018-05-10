@@ -184,8 +184,6 @@ export async function computeFileContents(cwd: string) {
         just put the content of the source file into the destination as-is */
         fileContents[destinationFilePath].computedContent = sourceFileContent;
         fileContents[destinationFilePath].type = 'unknown';
-
-        return;
       });
 
       /* `postProcess` gives users a chance to edit file contents before clown writes them to disk */

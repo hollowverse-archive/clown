@@ -19,7 +19,8 @@
         "**/Dockerfile*",
         "**/LICENSE",
         "**/README.md",
-        "**/src/cli/**"
+        "**/src/cli/**",
+        "**/c__*"
       ]
     }
   ]
