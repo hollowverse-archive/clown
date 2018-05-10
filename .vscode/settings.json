@@ -15,7 +15,10 @@
   "typescript.referencesCodeLens.enabled": true,
   "files.associations": {
     ".gqlconfig": "javascript",
-    ".stylelintrc": "json"
+    ".stylelintrc": "json",
+    "**/.babelrc": "jsonc",
+    "**/.babelrc.json": "jsonc",
+    "**/tsconfig.json": "jsonc"
   },
   "files.exclude": {
     "**/node_modules/**": true
