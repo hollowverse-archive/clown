@@ -21,7 +21,7 @@ export function postProcess(
   const clownCallbackPath = path.join(extensionPath, clownCallbackRelativePath);
   const clownFilesystem = new ClownFilesystem(fileContents);
 
-  // tslint:disable:next non-literal-require no-parameter-reassignment
+  // tslint:disable:next non-literal-require
   return (
     require(path.join(process.cwd(), clownCallbackPath))(clownFilesystem) ||
     clownFilesystem.fileContents

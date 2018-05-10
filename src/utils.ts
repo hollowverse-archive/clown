@@ -51,6 +51,10 @@ export function isArrayOfObjects(value: any[]) {
   return _.isArray(value) && _.every(value, _.isObject);
 }
 
+export function isArrayOfStrings(value: any[]) {
+  return _.isArray(value) && _.every(value, _.isString);
+}
+
 export function keyIsPotentialId(arrayOfObjects: any[], key: string) {
   const valuesOfKey = arrayOfObjects.map((obj: any) => obj[key]);
 
@@ -58,10 +62,6 @@ export function keyIsPotentialId(arrayOfObjects: any[], key: string) {
     isArrayOfStrings(valuesOfKey) &&
     _.uniq(valuesOfKey).length === arrayOfObjects.length
   );
-}
-
-export function isArrayOfStrings(value: any[]) {
-  return _.isArray(value) && _.every(value, _.isString);
 }
 
 export function guessKeyWithUniqueValue(records: any[]) {
@@ -81,10 +81,6 @@ export function guessKeyWithUniqueValue(records: any[]) {
   }
 
   return firstPotentialKey;
-}
-
-export function isArrayOfUnmergeables(arr: any[]) {
-  return _.isArray(arr) && _.every(arr, isUnmergeable);
 }
 
 export function isUnmergeable(value: any) {
@@ -109,4 +105,8 @@ export function isUnmergeable(value: any) {
     ],
     fn => fn(value),
   );
+}
+
+export function isArrayOfUnmergeables(arr: any[]) {
+  return _.isArray(arr) && _.every(arr, isUnmergeable);
 }

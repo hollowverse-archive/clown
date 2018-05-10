@@ -23,7 +23,7 @@ export async function extendConfig(cwd: string) {
 
       await fs.mkdirp(path.dirname(destinationPath));
 
-      return writeFile(destinationPath, fileContent.computedContent);
+      await writeFile(destinationPath, fileContent.computedContent);
     },
   );
 }

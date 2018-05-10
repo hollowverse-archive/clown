@@ -80,7 +80,7 @@
     "@babel/preset-stage-3": "^7.0.0-beta.46",
     "@commitlint/cli": "^6.1.3",
     "@hollowverse/clown": "^3.1.1",
-    "@hollowverse/config": "^34.0.0",
+    "@hollowverse/config": "^35.0.0",
     "@hollowverse/validate-filenames": "^3.0.2",
     "@types/bluebird": "^3.5.20",
     "@types/chalk": "^2.2.0",
