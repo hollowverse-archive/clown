@@ -204,8 +204,6 @@ If our `config-overrides`
 contains a file named `c__package.json`, clown would know that the target destination for this file is
 `package.json` and would merge the configurations correctly.
 
-## For issues or questions
+---
 
-A lot of the above may very well not make much sense. So feel free to post issues or questions here:
-
-https://github.com/hollowverse/hollowverse/issues
+[If you'd like to tell us something, or need help with anything...](https://github.com/hollowverse/hollowverse/wiki/Help)
